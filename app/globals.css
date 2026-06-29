@@ -1441,6 +1441,12 @@ img {
   flex: 0 0 auto;
 }
 
+.login-brand img,
+.admin-brand-row img {
+  opacity: 0.96;
+  filter: saturate(0.48) sepia(0.16) hue-rotate(8deg) brightness(0.7);
+}
+
 .login-brand span {
   display: grid;
   gap: 3px;
