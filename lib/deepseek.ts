@@ -56,46 +56,91 @@ function extractJson<T>(content: string): T {
   return JSON.parse(raw.slice(start, end + 1)) as T
 }
 
-export async function translateProductToEnglish(product: Product): Promise<ProductTranslation> {
+function cleanErrorMessage(error: unknown) {
+  const message = error instanceof Error ? error.message : 'Unknown error'
+  return message.replace(/\s+/g, ' ').slice(0, 260)
+}
+
+export function formatDeepSeekAdminError(error: unknown) {
+  const message = cleanErrorMessage(error)
+
+  if (message.includes('DEEPSEEK_API_KEY')) {
+    return 'DeepSeek 自动翻译失败：服务器没有配置 DEEPSEEK_API_KEY。'
+  }
+
+  if (message.includes('401') || message.includes('403')) {
+    return 'DeepSeek 自动翻译失败：API Key 无效、余额不足或没有模型权限。'
+  }
+
+  if (message.includes('429')) {
+    return 'DeepSeek 自动翻译失败：请求过于频繁，请稍后再试。'
+  }
+
+  if (message.includes('No JSON object') || message.includes('Unexpected token')) {
+    return 'DeepSeek 自动翻译失败：机器人返回的内容不是有效 JSON，请再保存一次。'
+  }
+
+  return `DeepSeek 自动翻译失败：${message}`
+}
+
+function requireChineseSource(product: Product) {
   const source = product.translations.zh
+  if (!source.name.trim()) {
+    throw new Error('请先填写中文产品名称，再使用 DeepSeek 自动翻译。')
+  }
+  if (!source.tagline.trim() && !source.description.trim()) {
+    throw new Error('请先填写中文短标语或产品描述，再使用 DeepSeek 自动翻译。')
+  }
+  return source
+}
+
+export async function translateProductToEnglish(product: Product): Promise<ProductTranslation> {
+  const source = requireChineseSource(product)
   const previous = product.translations.en
 
-  try {
-    const content = await callDeepSeek(
-      [
-        {
-          role: 'system',
-          content:
-            'You are a professional textile export copywriter. Translate Chinese product data to polished, concise English for an international B2B textile website. Return only valid JSON.'
-        },
-        {
-          role: 'user',
-          content: JSON.stringify({
-            instruction:
-              'Translate to English. Preserve technical meaning. Keep specs as an array of {label,value}.',
-            product: source
-          })
-        }
-      ],
-      0.2
-    )
+  const content = await callDeepSeek(
+    [
+      {
+        role: 'system',
+        content:
+          'You are a professional textile export copywriter. Translate Chinese product data to polished, concise English for an international B2B textile website. Return only valid JSON. Do not use Markdown.'
+      },
+      {
+        role: 'user',
+        content: JSON.stringify({
+          instruction:
+            'Translate to English. Preserve technical meaning. Keep specs as an array of {label,value}. Return every field in the required shape.',
+          requiredJsonShape: {
+            name: 'English product name',
+            tagline: 'One concise B2B sales sentence',
+            description: 'One practical paragraph for textile buyers',
+            applications: ['Application'],
+            specs: [{ label: 'Spec label', value: 'Spec value' }],
+            seoTitle: 'SEO title',
+            seoDescription: 'SEO description'
+          },
+          product: source
+        })
+      }
+    ],
+    0.2
+  )
 
-    const translated = extractJson<ProductTranslation>(content)
-    return {
-      name: translated.name || previous.name,
-      tagline: translated.tagline || previous.tagline,
-      description: translated.description || previous.description,
-      applications: Array.isArray(translated.applications) ? translated.applications : previous.applications,
-      specs: Array.isArray(translated.specs) ? translated.specs : previous.specs,
-      seoTitle: translated.seoTitle,
-      seoDescription: translated.seoDescription,
-      translationStatus: 'ai'
-    }
-  } catch {
-    return {
-      ...previous,
-      translationStatus: previous.translationStatus === 'manual' ? 'manual' : 'failed'
-    }
+  const translated = extractJson<ProductTranslation>(content)
+  const name = translated.name?.trim()
+  if (!name) {
+    throw new Error('DeepSeek returned JSON without a translated product name')
+  }
+
+  return {
+    name,
+    tagline: translated.tagline?.trim() || previous.tagline,
+    description: translated.description?.trim() || previous.description,
+    applications: Array.isArray(translated.applications) ? translated.applications : previous.applications,
+    specs: Array.isArray(translated.specs) ? translated.specs : previous.specs,
+    seoTitle: translated.seoTitle,
+    seoDescription: translated.seoDescription,
+    translationStatus: 'ai'
   }
 }
 

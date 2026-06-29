@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { isAdminRequest } from '@/lib/auth'
 import { getProducts, saveProducts } from '@/lib/data-store'
-import { translateProductToEnglish } from '@/lib/deepseek'
+import { formatDeepSeekAdminError, translateProductToEnglish } from '@/lib/deepseek'
 import { normalizeProduct } from '@/lib/product-utils'
 
 export const dynamic = 'force-dynamic'
@@ -24,9 +24,18 @@ export async function POST(request: NextRequest) {
   const body = await request.json().catch(() => null)
   const product = normalizeProduct(body?.product)
   const shouldTranslate = body?.autoTranslate !== false
-  const finalProduct = shouldTranslate
-    ? { ...product, translations: { ...product.translations, en: await translateProductToEnglish(product) } }
-    : product
+  let finalProduct = product
+
+  if (shouldTranslate) {
+    try {
+      finalProduct = {
+        ...product,
+        translations: { ...product.translations, en: await translateProductToEnglish(product) }
+      }
+    } catch (error) {
+      return NextResponse.json({ error: formatDeepSeekAdminError(error) }, { status: 502 })
+    }
+  }
 
   const products = await getProducts()
   await saveProducts([finalProduct, ...products.filter((item) => item.id !== finalProduct.id)])

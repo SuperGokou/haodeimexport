@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { isAdminRequest } from '@/lib/auth'
 import { getProducts, saveProducts } from '@/lib/data-store'
-import { translateProductToEnglish } from '@/lib/deepseek'
+import { formatDeepSeekAdminError, translateProductToEnglish } from '@/lib/deepseek'
 import { normalizeProduct } from '@/lib/product-utils'
 
 export const dynamic = 'force-dynamic'
@@ -26,9 +26,18 @@ export async function PATCH(
 
   const product = normalizeProduct({ ...body?.product, id }, previous)
   const shouldTranslate = body?.autoTranslate !== false
-  const finalProduct = shouldTranslate
-    ? { ...product, translations: { ...product.translations, en: await translateProductToEnglish(product) } }
-    : product
+  let finalProduct = product
+
+  if (shouldTranslate) {
+    try {
+      finalProduct = {
+        ...product,
+        translations: { ...product.translations, en: await translateProductToEnglish(product) }
+      }
+    } catch (error) {
+      return NextResponse.json({ error: formatDeepSeekAdminError(error) }, { status: 502 })
+    }
+  }
 
   await saveProducts(products.map((item) => (item.id === id ? finalProduct : item)))
   return NextResponse.json({ product: finalProduct })
