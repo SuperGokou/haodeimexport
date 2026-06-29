@@ -160,6 +160,10 @@ export default function ProductSite({
 
   const featuredProducts = filteredProducts.filter((product) => product.featured).slice(0, 4)
   const collectionProducts = filteredProducts.slice(0, 3)
+  const heroMaterials = useMemo(
+    () => Array.from(new Set(initialProducts.map((product) => product.category))).slice(0, 4),
+    [initialProducts]
+  )
 
   return (
     <main className="site-shell">
@@ -182,7 +186,8 @@ export default function ProductSite({
             <Menu size={20} />
           </button>
           <a href="#top" className="brand-mark" aria-label={companyText.name}>
-            <img className="brand-logo" src="/images/brand-logo.png" alt={companyText.name} />
+            <span className="brand-cn">{companyText.shortName}</span>
+            <span className="brand-en">{locale === 'zh' ? 'HUZHOU HAODE' : 'Import & Export'}</span>
           </a>
           <nav className={menuOpen ? 'nav-links nav-links-open' : 'nav-links'}>
             <button className="icon-button mobile-only close-menu" onClick={() => setMenuOpen(false)}>
@@ -223,29 +228,42 @@ export default function ProductSite({
       </header>
 
       <section id="top" className="hero-section">
-        <img className="hero-image" src="/images/hero-fabric-rolls.png" alt="" />
-        <div className="hero-content">
-          <p className="eyebrow">{t.heroKicker}</p>
-          <h1>{t.heroTitle}</h1>
-          <p>{t.heroCopy}</p>
-          <div className="hero-actions">
-            <a href="#products" className="primary-button">
-              {t.explore}
-              <ArrowRight size={16} />
-            </a>
-            <a href="#contact" className="secondary-button">
-              {t.samples}
-              <PackageCheck size={16} />
-            </a>
+        <div className="hero-layout">
+          <div className="hero-content">
+            <p className="eyebrow">{t.heroKicker}</p>
+            <h1>{t.heroTitle}</h1>
+            <p>{t.heroCopy}</p>
+            <div className="hero-actions">
+              <a href="#products" className="primary-button">
+                {t.explore}
+                <ArrowRight size={16} />
+              </a>
+              <a href="#contact" className="secondary-button">
+                {t.samples}
+                <PackageCheck size={16} />
+              </a>
+            </div>
+            <div className="hero-proof">
+              {company.facts.map((fact) => (
+                <span key={fact.label}>
+                  <strong>{fact.value}</strong>
+                  {fact.label}
+                </span>
+              ))}
+            </div>
           </div>
-          <div className="hero-proof">
-            {company.facts.map((fact) => (
-              <span key={fact.label}>
-                <strong>{fact.value}</strong>
-                {fact.label}
-              </span>
-            ))}
-          </div>
+          <figure className="hero-visual">
+            <img className="hero-image" src="/images/hero-fabric-rolls.png" alt="" />
+            <figcaption className="hero-caption">
+              <span>{locale === 'zh' ? '面料方向' : 'Fabric direction'}</span>
+              <strong>{heroMaterials.join(' / ')}</strong>
+            </figcaption>
+          </figure>
+        </div>
+        <div className="hero-material-bar" aria-label={locale === 'zh' ? '主要面料分类' : 'Primary fabric categories'}>
+          {heroMaterials.map((material) => (
+            <span key={material}>{material}</span>
+          ))}
         </div>
       </section>
 
