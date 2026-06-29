@@ -51,6 +51,15 @@ type Copy = {
   admin: string
 }
 
+type CatalogMode = 'products' | 'collections'
+
+type ProductCollection = {
+  name: string
+  products: Product[]
+  categories: string[]
+  image: string
+}
+
 const copy: Record<Locale, Copy> = {
   en: {
     nav: ['Products', 'Collections', 'About', 'Contact'],
@@ -136,6 +145,9 @@ export default function ProductSite({
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('all')
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
+  const [catalogOpen, setCatalogOpen] = useState<CatalogMode | null>(null)
+  const [catalogQuery, setCatalogQuery] = useState('')
+  const [catalogFilter, setCatalogFilter] = useState('all')
   const t = copy[locale]
   const companyText = company.translations[locale]
 
@@ -143,6 +155,23 @@ export default function ProductSite({
     () => ['all', ...Array.from(new Set(initialProducts.map((product) => product.category)))],
     [initialProducts]
   )
+
+  const collections = useMemo<ProductCollection[]>(() => {
+    const groups = new Map<string, Product[]>()
+    initialProducts.forEach((product) => {
+      const key = product.collection || product.category
+      groups.set(key, [...(groups.get(key) || []), product])
+    })
+
+    return Array.from(groups.entries())
+      .map(([name, products]) => ({
+        name,
+        products,
+        categories: Array.from(new Set(products.map((product) => product.category))),
+        image: products[0]?.gallery[0] || products[0]?.image || '/images/swatch-books.png'
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name))
+  }, [initialProducts])
 
   const filteredProducts = useMemo(() => {
     const lower = query.toLowerCase()
@@ -158,12 +187,65 @@ export default function ProductSite({
     })
   }, [category, initialProducts, locale, query])
 
+  const catalogProducts = useMemo(() => {
+    const lower = catalogQuery.trim().toLowerCase()
+    return initialProducts.filter((product) => {
+      const text = product.translations[locale]
+      const matchesFilter = catalogFilter === 'all' || product.category === catalogFilter
+      const haystack = [
+        text.name,
+        text.tagline,
+        text.description,
+        product.sku,
+        product.category,
+        product.collection
+      ]
+        .join(' ')
+        .toLowerCase()
+      return matchesFilter && (!lower || haystack.includes(lower))
+    })
+  }, [catalogFilter, catalogQuery, initialProducts, locale])
+
+  const catalogCollections = useMemo(() => {
+    const lower = catalogQuery.trim().toLowerCase()
+    return collections.filter((collection) => {
+      const matchesFilter = catalogFilter === 'all' || collection.name === catalogFilter
+      const matchesQuery =
+        !lower ||
+        collection.name.toLowerCase().includes(lower) ||
+        collection.categories.join(' ').toLowerCase().includes(lower) ||
+        collection.products.some((product) => {
+          const text = product.translations[locale]
+          return `${text.name} ${text.tagline} ${product.sku}`.toLowerCase().includes(lower)
+        })
+      return matchesFilter && matchesQuery
+    })
+  }, [catalogFilter, catalogQuery, collections, locale])
+
   const featuredProducts = filteredProducts.filter((product) => product.featured).slice(0, 4)
   const collectionProducts = filteredProducts.slice(0, 3)
   const heroMaterials = useMemo(
     () => Array.from(new Set(initialProducts.map((product) => product.category))).slice(0, 4),
     [initialProducts]
   )
+
+  function openCatalog(mode: CatalogMode) {
+    setCatalogOpen(mode)
+    setCatalogQuery('')
+    setCatalogFilter('all')
+    setMenuOpen(false)
+  }
+
+  function changeCatalogMode(mode: CatalogMode) {
+    setCatalogOpen(mode)
+    setCatalogQuery('')
+    setCatalogFilter('all')
+  }
+
+  function openProduct(product: Product) {
+    setCatalogOpen(null)
+    setSelectedProduct(product)
+  }
 
   return (
     <main className="site-shell">
@@ -196,12 +278,12 @@ export default function ProductSite({
             <button className="icon-button mobile-only close-menu" onClick={() => setMenuOpen(false)}>
               <X size={19} />
             </button>
-            <a href="#products" onClick={() => setMenuOpen(false)}>
+            <button className="nav-link-button" onClick={() => openCatalog('products')}>
               {t.nav[0]}
-            </a>
-            <a href="#collections" onClick={() => setMenuOpen(false)}>
+            </button>
+            <button className="nav-link-button" onClick={() => openCatalog('collections')}>
               {t.nav[1]}
-            </a>
+            </button>
             <a href="#about" onClick={() => setMenuOpen(false)}>
               {t.nav[2]}
             </a>
@@ -406,6 +488,26 @@ export default function ProductSite({
 
       <ChatWidget locale={locale} t={t} />
 
+      {catalogOpen && (
+        <CatalogPanel
+          mode={catalogOpen}
+          locale={locale}
+          t={t}
+          allProducts={initialProducts}
+          products={catalogProducts}
+          categories={categories}
+          allCollections={collections}
+          collections={catalogCollections}
+          query={catalogQuery}
+          filter={catalogFilter}
+          onQueryChange={setCatalogQuery}
+          onFilterChange={setCatalogFilter}
+          onModeChange={changeCatalogMode}
+          onProductOpen={openProduct}
+          onClose={() => setCatalogOpen(null)}
+        />
+      )}
+
       {selectedProduct && (
         <ProductModal
           product={selectedProduct}
@@ -415,6 +517,260 @@ export default function ProductSite({
         />
       )}
     </main>
+  )
+}
+
+function CatalogPanel({
+  mode,
+  locale,
+  t,
+  allProducts,
+  products,
+  categories,
+  allCollections,
+  collections,
+  query,
+  filter,
+  onQueryChange,
+  onFilterChange,
+  onModeChange,
+  onProductOpen,
+  onClose
+}: {
+  mode: CatalogMode
+  locale: Locale
+  t: Copy
+  allProducts: Product[]
+  products: Product[]
+  categories: string[]
+  allCollections: ProductCollection[]
+  collections: ProductCollection[]
+  query: string
+  filter: string
+  onQueryChange: (value: string) => void
+  onFilterChange: (value: string) => void
+  onModeChange: (mode: CatalogMode) => void
+  onProductOpen: (product: Product) => void
+  onClose: () => void
+}) {
+  const isProducts = mode === 'products'
+  const title =
+    locale === 'zh'
+      ? isProducts
+        ? '全部产品'
+        : '全部系列'
+      : isProducts
+        ? 'All Products'
+        : 'All Collections'
+  const intro =
+    locale === 'zh'
+      ? isProducts
+        ? '按品类、关键词、SKU 快速查找面料，适合后期大量产品持续扩展。'
+        : '按系列集中浏览面料组合，每个系列展示代表产品和可延展方向。'
+      : isProducts
+        ? 'Search by category, keyword, or SKU. Built for a growing product library.'
+        : 'Browse textile collections with representative products and coordinated directions.'
+  const searchPlaceholder =
+    locale === 'zh'
+      ? isProducts
+        ? '搜索产品、品类、SKU'
+        : '搜索系列、品类、产品'
+      : isProducts
+        ? 'Search product, category, SKU'
+        : 'Search collection, category, product'
+  const visibleCount = isProducts ? products.length : collections.length
+  const totalCount = isProducts ? allProducts.length : allCollections.length
+  const countLabel =
+    locale === 'zh' ? `${visibleCount} / ${totalCount}` : `${visibleCount} of ${totalCount}`
+  const filters = isProducts ? categories : ['all', ...allCollections.map((collection) => collection.name)]
+
+  function filterCount(value: string) {
+    if (value === 'all') return isProducts ? allProducts.length : allCollections.length
+    if (isProducts) return allProducts.filter((product) => product.category === value).length
+    return allCollections.find((collection) => collection.name === value)?.products.length || 0
+  }
+
+  return (
+    <div className="catalog-backdrop" onClick={onClose}>
+      <section
+        className="catalog-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label={title}
+        onClick={(event) => event.stopPropagation()}
+      >
+        <header className="catalog-header">
+          <div>
+            <p className="catalog-kicker">{locale === 'zh' ? '产品目录' : 'Textile Directory'}</p>
+            <h2>{title}</h2>
+            <p>{intro}</p>
+          </div>
+          <button className="icon-button catalog-close" onClick={onClose} aria-label={t.close}>
+            <X size={20} />
+          </button>
+        </header>
+
+        <div className="catalog-tabs" aria-label={locale === 'zh' ? '目录类型' : 'Directory type'}>
+          <button className={isProducts ? 'active' : ''} onClick={() => onModeChange('products')}>
+            {t.nav[0]}
+          </button>
+          <button className={!isProducts ? 'active' : ''} onClick={() => onModeChange('collections')}>
+            {t.nav[1]}
+          </button>
+        </div>
+
+        <div className="catalog-toolbar">
+          <label className="catalog-search">
+            <Search size={16} />
+            <input
+              value={query}
+              onChange={(event) => onQueryChange(event.target.value)}
+              placeholder={searchPlaceholder}
+            />
+          </label>
+          <span className="catalog-count">
+            {countLabel}
+            <small>{locale === 'zh' ? (isProducts ? ' 个产品' : ' 个系列') : isProducts ? ' products' : ' collections'}</small>
+          </span>
+        </div>
+
+        <div className="catalog-body">
+          <aside className="catalog-rail">
+            {filters.map((item) => (
+              <button
+                key={item}
+                className={filter === item ? 'catalog-filter active' : 'catalog-filter'}
+                onClick={() => onFilterChange(item)}
+              >
+                <span>{item === 'all' ? t.all : item}</span>
+                <small>{filterCount(item)}</small>
+              </button>
+            ))}
+          </aside>
+
+          <div className="catalog-results">
+            {isProducts ? (
+              products.length ? (
+                <div className="catalog-product-grid">
+                  {products.map((product) => (
+                    <CatalogProductItem
+                      key={product.id}
+                      product={product}
+                      locale={locale}
+                      cta={t.viewProduct}
+                      onOpen={() => onProductOpen(product)}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <CatalogEmpty locale={locale} />
+              )
+            ) : collections.length ? (
+              <div className="catalog-collection-grid">
+                {collections.map((collection) => (
+                  <CatalogCollectionItem
+                    key={collection.name}
+                    collection={collection}
+                    locale={locale}
+                    cta={t.viewProduct}
+                    onProductOpen={onProductOpen}
+                  />
+                ))}
+              </div>
+            ) : (
+              <CatalogEmpty locale={locale} />
+            )}
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+function CatalogProductItem({
+  product,
+  locale,
+  cta,
+  onOpen
+}: {
+  product: Product
+  locale: Locale
+  cta: string
+  onOpen: () => void
+}) {
+  const text = product.translations[locale]
+  return (
+    <button className="catalog-product-card" onClick={onOpen}>
+      <img src={product.image} alt={text.name} />
+      <span className="catalog-card-copy">
+        <small>{product.category} / {product.sku}</small>
+        <strong>{text.name}</strong>
+        <em>{product.collection}</em>
+        <span>{text.tagline}</span>
+        <span className="catalog-card-footer">
+          <span className="mini-swatches">
+            {product.colors.slice(0, 4).map((color) => (
+              <i key={color} style={{ backgroundColor: color }} />
+            ))}
+          </span>
+          <b>
+            {cta}
+            <ArrowRight size={14} />
+          </b>
+        </span>
+      </span>
+    </button>
+  )
+}
+
+function CatalogCollectionItem({
+  collection,
+  locale,
+  cta,
+  onProductOpen
+}: {
+  collection: ProductCollection
+  locale: Locale
+  cta: string
+  onProductOpen: (product: Product) => void
+}) {
+  const lead = collection.products[0]
+  const leadText = lead.translations[locale]
+  const countLabel =
+    locale === 'zh' ? `${collection.products.length} 个产品` : `${collection.products.length} products`
+
+  return (
+    <article className="catalog-collection-card">
+      <img src={collection.image} alt={collection.name} />
+      <div className="catalog-collection-copy">
+        <small>
+          {countLabel} / {collection.categories.join(' / ')}
+        </small>
+        <h3>{collection.name}</h3>
+        <p>{leadText.tagline}</p>
+        <div className="catalog-mini-list">
+          {collection.products.slice(0, 4).map((product) => (
+            <button key={product.id} onClick={() => onProductOpen(product)}>
+              <span>{product.translations[locale].name}</span>
+              <ArrowRight size={13} />
+            </button>
+          ))}
+        </div>
+        <button className="catalog-collection-open" onClick={() => onProductOpen(lead)}>
+          {cta}
+          <ArrowRight size={14} />
+        </button>
+      </div>
+    </article>
+  )
+}
+
+function CatalogEmpty({ locale }: { locale: Locale }) {
+  return (
+    <div className="catalog-empty">
+      <strong>{locale === 'zh' ? '没有匹配结果' : 'No matching results'}</strong>
+      <p>{locale === 'zh' ? '换一个关键词或筛选条件试试。' : 'Try another keyword or filter.'}</p>
+    </div>
   )
 }
 
