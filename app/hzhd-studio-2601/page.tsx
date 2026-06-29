@@ -684,6 +684,7 @@ export default function AdminPage() {
               labels={t.translationEditor}
               value={draft.translations.zh}
               onChange={(patch) => patchTranslation('zh', patch)}
+              showStatus={false}
             />
             <TranslationEditor
               title={t.englishTranslation}
@@ -781,12 +782,14 @@ function TranslationEditor({
   title,
   labels,
   value,
-  onChange
+  onChange,
+  showStatus = true
 }: {
   title: string
   labels: TranslationEditorCopy
   value: ProductTranslation
   onChange: (patch: Partial<ProductTranslation>) => void
+  showStatus?: boolean
 }) {
   const status = value.translationStatus || 'manual'
 
@@ -824,9 +827,11 @@ function TranslationEditor({
           onChange={(event) => onChange({ specs: parseSpecs(event.target.value) })}
         />
       </Field>
-      <p className="translation-status">
-        {labels.translationStatus}: {labels.statusValues[status] || status}
-      </p>
+      {showStatus && (
+        <p className="translation-status">
+          {labels.translationStatus}: {labels.statusValues[status] || status}
+        </p>
+      )}
     </fieldset>
   )
 }

@@ -28,9 +28,14 @@ export async function POST(request: NextRequest) {
 
   if (shouldTranslate) {
     try {
+      const englishTranslation = await translateProductToEnglish(product)
+
       finalProduct = {
         ...product,
-        translations: { ...product.translations, en: await translateProductToEnglish(product) }
+        translations: {
+          ...product.translations,
+          en: { ...englishTranslation, translationStatus: 'ai' }
+        }
       }
     } catch (error) {
       return NextResponse.json({ error: formatDeepSeekAdminError(error) }, { status: 502 })

@@ -30,9 +30,14 @@ export async function PATCH(
 
   if (shouldTranslate) {
     try {
+      const englishTranslation = await translateProductToEnglish(product)
+
       finalProduct = {
         ...product,
-        translations: { ...product.translations, en: await translateProductToEnglish(product) }
+        translations: {
+          ...product.translations,
+          en: { ...englishTranslation, translationStatus: 'ai' }
+        }
       }
     } catch (error) {
       return NextResponse.json({ error: formatDeepSeekAdminError(error) }, { status: 502 })
