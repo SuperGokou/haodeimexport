@@ -1,8 +1,13 @@
 {
-  "email": "sales@haodeimexport.com",
-  "phone": "+86 572 000 0000",
-  "whatsapp": "+86 138 0000 0000",
-  "markets": ["North America", "Europe", "Middle East", "Southeast Asia"],
+  "email": "sales@haodetextile.com ",
+  "phone": "+86 180 7414 1905",
+  "whatsapp": "+86 180 7414 1905",
+  "markets": [
+    "North America",
+    "Europe",
+    "Middle East",
+    "Southeast Asia"
+  ],
   "capabilities": [
     "Fabric sourcing and development",
     "Sample room and colorway coordination",
@@ -10,10 +15,22 @@
     "Export documentation support"
   ],
   "facts": [
-    { "label": "Product lines", "value": "8+" },
-    { "label": "Export markets", "value": "30+" },
-    { "label": "Sample response", "value": "48h" },
-    { "label": "QC checkpoints", "value": "4-step" }
+    {
+      "label": "Product lines",
+      "value": "8+"
+    },
+    {
+      "label": "Export markets",
+      "value": "30+"
+    },
+    {
+      "label": "Sample response",
+      "value": "48h"
+    },
+    {
+      "label": "QC checkpoints",
+      "value": "4-step"
+    }
   ],
   "translations": {
     "en": {
