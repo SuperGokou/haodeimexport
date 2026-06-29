@@ -16,7 +16,7 @@
       "#a8845e",
       "#2d3c38"
     ],
-    "updatedAt": "2026-06-29T06:38:58.804Z",
+    "updatedAt": "2026-06-29T06:39:04.440Z",
     "translations": {
       "en": {
         "name": "",
@@ -74,169 +74,84 @@
     }
   },
   {
-    "id": "prod-camellia-chenille",
-    "slug": "camellia-chenille",
-    "sku": "HD-CH-2601",
-    "category": "Chenille Upholstery",
+    "id": "prod-stone-boucle",
+    "slug": "stone-boucle",
+    "sku": "HD-BC-3120",
+    "category": "Boucle Upholstery",
     "status": "published",
     "featured": true,
-    "collection": "Soft Residence",
-    "image": "/images/swatch-books.png",
+    "collection": "Tactile Stone",
+    "image": "/images/quality-control.png",
     "gallery": [
+      "/images/quality-control.png",
       "/images/swatch-books.png",
-      "/images/collection-rolls.png",
       "/images/pattern-grid.png"
     ],
     "colors": [
-      "#eee6d8",
-      "#b79a73",
-      "#7a8b80",
-      "#627f93",
-      "#28323a"
+      "#ede8db",
+      "#c8b79e",
+      "#a59f91",
+      "#6d7b6e",
+      "#38413d"
     ],
     "updatedAt": "2026-06-28T00:00:00.000Z",
     "translations": {
       "en": {
-        "name": "Camellia Chenille",
-        "tagline": "Soft handfeel, layered color, export-ready upholstery fabric.",
-        "description": "A refined chenille upholstery fabric with a dry natural texture and stable colorways for sofas, lounge chairs, cushions, and boutique hospitality interiors.",
+        "name": "Stone Boucle",
+        "tagline": "Dimensional boucle surface with a clean modern palette.",
+        "description": "A tactile boucle upholstery fabric created for contemporary sofas, lounge pieces, and soft commercial interiors requiring comfort and visible texture.",
         "applications": [
           "Sofa",
-          "Lounge chair",
-          "Cushion",
-          "Hospitality seating"
+          "Armchair",
+          "Ottoman",
+          "Boutique hotel seating"
         ],
         "specs": [
           {
-            "label": "Composition",
-            "value": "Polyester blend"
+            "label": "Surface",
+            "value": "Boucle loop texture"
           },
           {
             "label": "Width",
             "value": "140 cm"
           },
           {
-            "label": "Weight",
-            "value": "520 gsm approx."
+            "label": "Handfeel",
+            "value": "Soft and dimensional"
           },
           {
-            "label": "MOQ",
-            "value": "Discuss by colorway"
+            "label": "QC",
+            "value": "Shade and handfeel inspection"
           }
         ],
         "translationStatus": "manual"
       },
       "zh": {
-        "name": "山茶雪尼尔",
-        "tagline": "手感柔和、色层丰富、适合出口订单的沙发布。",
-        "description": "细腻雪尼尔沙发布，带自然干爽肌理，色系稳定，适合沙发、休闲椅、靠垫及精品酒店空间。",
+        "name": "岩感圈圈布",
+        "tagline": "立体圈圈肌理，现代中性色系。",
+        "description": "触感鲜明的圈圈沙发布，适合现代沙发、休闲软装和精品商业空间，兼具舒适度和可见肌理。",
         "applications": [
           "沙发",
-          "休闲椅",
-          "靠垫",
-          "酒店座椅"
+          "单椅",
+          "脚凳",
+          "精品酒店座椅"
         ],
         "specs": [
           {
-            "label": "成分",
-            "value": "涤纶混纺"
+            "label": "表面",
+            "value": "圈圈纱肌理"
           },
           {
             "label": "门幅",
             "value": "140 cm"
           },
           {
-            "label": "克重",
-            "value": "约 520 gsm"
+            "label": "手感",
+            "value": "柔软立体"
           },
           {
-            "label": "起订量",
-            "value": "按色号沟通"
-          }
-        ],
-        "translationStatus": "manual"
-      }
-    }
-  },
-  {
-    "id": "prod-verdant-jacquard",
-    "slug": "verdant-jacquard",
-    "sku": "HD-JQ-1807",
-    "category": "Jacquard Texture",
-    "status": "published",
-    "featured": true,
-    "collection": "Verdant Pattern",
-    "image": "/images/pattern-grid.png",
-    "gallery": [
-      "/images/pattern-grid.png",
-      "/images/showroom-textiles.png",
-      "/images/quality-control.png"
-    ],
-    "colors": [
-      "#f4efe4",
-      "#a8845e",
-      "#5d7368",
-      "#2d3c38",
-      "#202326"
-    ],
-    "updatedAt": "2026-06-28T00:00:00.000Z",
-    "translations": {
-      "en": {
-        "name": "Verdant Jacquard",
-        "tagline": "Structured patterns for curtains, wall covering, and statement upholstery.",
-        "description": "A jacquard series with geometric and small-scale woven pattern options. Designed for buyers who need a coordinated palette across multiple interior applications.",
-        "applications": [
-          "Curtain",
-          "Decorative panel",
-          "Wall textile",
-          "Accent seating"
-        ],
-        "specs": [
-          {
-            "label": "Construction",
-            "value": "Jacquard woven"
-          },
-          {
-            "label": "Width",
-            "value": "145 cm"
-          },
-          {
-            "label": "Colorways",
-            "value": "Custom development available"
-          },
-          {
-            "label": "Sampling",
-            "value": "Lab dip and hand sample"
-          }
-        ],
-        "translationStatus": "manual"
-      },
-      "zh": {
-        "name": "森境提花",
-        "tagline": "适合窗帘、墙布和重点软装的结构感纹样。",
-        "description": "提花系列包含几何、小纹样等多种织造效果，适合需要多场景统一色系的海外采购客户。",
-        "applications": [
-          "窗帘",
-          "装饰面板",
-          "墙布",
-          "点缀座椅"
-        ],
-        "specs": [
-          {
-            "label": "结构",
-            "value": "提花织造"
-          },
-          {
-            "label": "门幅",
-            "value": "145 cm"
-          },
-          {
-            "label": "色系",
-            "value": "可定制开发"
-          },
-          {
-            "label": "打样",
-            "value": "色样和手样"
+            "label": "质检",
+            "value": "色差和手感检验"
           }
         ],
         "translationStatus": "manual"
@@ -329,84 +244,169 @@
     }
   },
   {
-    "id": "prod-stone-boucle",
-    "slug": "stone-boucle",
-    "sku": "HD-BC-3120",
-    "category": "Boucle Upholstery",
+    "id": "prod-verdant-jacquard",
+    "slug": "verdant-jacquard",
+    "sku": "HD-JQ-1807",
+    "category": "Jacquard Texture",
     "status": "published",
     "featured": true,
-    "collection": "Tactile Stone",
-    "image": "/images/quality-control.png",
+    "collection": "Verdant Pattern",
+    "image": "/images/pattern-grid.png",
     "gallery": [
-      "/images/quality-control.png",
-      "/images/swatch-books.png",
-      "/images/pattern-grid.png"
+      "/images/pattern-grid.png",
+      "/images/showroom-textiles.png",
+      "/images/quality-control.png"
     ],
     "colors": [
-      "#ede8db",
-      "#c8b79e",
-      "#a59f91",
-      "#6d7b6e",
-      "#38413d"
+      "#f4efe4",
+      "#a8845e",
+      "#5d7368",
+      "#2d3c38",
+      "#202326"
     ],
     "updatedAt": "2026-06-28T00:00:00.000Z",
     "translations": {
       "en": {
-        "name": "Stone Boucle",
-        "tagline": "Dimensional boucle surface with a clean modern palette.",
-        "description": "A tactile boucle upholstery fabric created for contemporary sofas, lounge pieces, and soft commercial interiors requiring comfort and visible texture.",
+        "name": "Verdant Jacquard",
+        "tagline": "Structured patterns for curtains, wall covering, and statement upholstery.",
+        "description": "A jacquard series with geometric and small-scale woven pattern options. Designed for buyers who need a coordinated palette across multiple interior applications.",
         "applications": [
-          "Sofa",
-          "Armchair",
-          "Ottoman",
-          "Boutique hotel seating"
+          "Curtain",
+          "Decorative panel",
+          "Wall textile",
+          "Accent seating"
         ],
         "specs": [
           {
-            "label": "Surface",
-            "value": "Boucle loop texture"
+            "label": "Construction",
+            "value": "Jacquard woven"
+          },
+          {
+            "label": "Width",
+            "value": "145 cm"
+          },
+          {
+            "label": "Colorways",
+            "value": "Custom development available"
+          },
+          {
+            "label": "Sampling",
+            "value": "Lab dip and hand sample"
+          }
+        ],
+        "translationStatus": "manual"
+      },
+      "zh": {
+        "name": "森境提花",
+        "tagline": "适合窗帘、墙布和重点软装的结构感纹样。",
+        "description": "提花系列包含几何、小纹样等多种织造效果，适合需要多场景统一色系的海外采购客户。",
+        "applications": [
+          "窗帘",
+          "装饰面板",
+          "墙布",
+          "点缀座椅"
+        ],
+        "specs": [
+          {
+            "label": "结构",
+            "value": "提花织造"
+          },
+          {
+            "label": "门幅",
+            "value": "145 cm"
+          },
+          {
+            "label": "色系",
+            "value": "可定制开发"
+          },
+          {
+            "label": "打样",
+            "value": "色样和手样"
+          }
+        ],
+        "translationStatus": "manual"
+      }
+    }
+  },
+  {
+    "id": "prod-camellia-chenille",
+    "slug": "camellia-chenille",
+    "sku": "HD-CH-2601",
+    "category": "Chenille Upholstery",
+    "status": "published",
+    "featured": true,
+    "collection": "Soft Residence",
+    "image": "/images/swatch-books.png",
+    "gallery": [
+      "/images/swatch-books.png",
+      "/images/collection-rolls.png",
+      "/images/pattern-grid.png"
+    ],
+    "colors": [
+      "#eee6d8",
+      "#b79a73",
+      "#7a8b80",
+      "#627f93",
+      "#28323a"
+    ],
+    "updatedAt": "2026-06-28T00:00:00.000Z",
+    "translations": {
+      "en": {
+        "name": "Camellia Chenille",
+        "tagline": "Soft handfeel, layered color, export-ready upholstery fabric.",
+        "description": "A refined chenille upholstery fabric with a dry natural texture and stable colorways for sofas, lounge chairs, cushions, and boutique hospitality interiors.",
+        "applications": [
+          "Sofa",
+          "Lounge chair",
+          "Cushion",
+          "Hospitality seating"
+        ],
+        "specs": [
+          {
+            "label": "Composition",
+            "value": "Polyester blend"
           },
           {
             "label": "Width",
             "value": "140 cm"
           },
           {
-            "label": "Handfeel",
-            "value": "Soft and dimensional"
+            "label": "Weight",
+            "value": "520 gsm approx."
           },
           {
-            "label": "QC",
-            "value": "Shade and handfeel inspection"
+            "label": "MOQ",
+            "value": "Discuss by colorway"
           }
         ],
         "translationStatus": "manual"
       },
       "zh": {
-        "name": "岩感圈圈布",
-        "tagline": "立体圈圈肌理，现代中性色系。",
-        "description": "触感鲜明的圈圈沙发布，适合现代沙发、休闲软装和精品商业空间，兼具舒适度和可见肌理。",
+        "name": "山茶雪尼尔",
+        "tagline": "手感柔和、色层丰富、适合出口订单的沙发布。",
+        "description": "细腻雪尼尔沙发布，带自然干爽肌理，色系稳定，适合沙发、休闲椅、靠垫及精品酒店空间。",
         "applications": [
           "沙发",
-          "单椅",
-          "脚凳",
-          "精品酒店座椅"
+          "休闲椅",
+          "靠垫",
+          "酒店座椅"
         ],
         "specs": [
           {
-            "label": "表面",
-            "value": "圈圈纱肌理"
+            "label": "成分",
+            "value": "涤纶混纺"
           },
           {
             "label": "门幅",
             "value": "140 cm"
           },
           {
-            "label": "手感",
-            "value": "柔软立体"
+            "label": "克重",
+            "value": "约 520 gsm"
           },
           {
-            "label": "质检",
-            "value": "色差和手感检验"
+            "label": "起订量",
+            "value": "按色号沟通"
           }
         ],
         "translationStatus": "manual"
