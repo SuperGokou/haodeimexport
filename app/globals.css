@@ -818,6 +818,17 @@ img {
   box-shadow: var(--shadow);
 }
 
+.login-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.login-topbar .eyebrow {
+  margin: 0;
+}
+
 .login-panel input,
 .field input,
 .field textarea,
