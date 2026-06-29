@@ -1,168 +1,83 @@
 [
   {
-    "id": "prod-stone-boucle",
-    "slug": "stone-boucle",
-    "sku": "HD-BC-3120",
-    "category": "Boucle Upholstery",
+    "id": "prod-camellia-chenille",
+    "slug": "camellia-chenille",
+    "sku": "HD-CH-2601",
+    "category": "Chenille Upholstery",
     "status": "published",
     "featured": true,
-    "collection": "Tactile Stone",
-    "image": "/images/quality-control.png",
+    "collection": "Soft Residence",
+    "image": "/images/swatch-books.png",
     "gallery": [
-      "/images/quality-control.png",
       "/images/swatch-books.png",
+      "/images/collection-rolls.png",
       "/images/pattern-grid.png"
     ],
     "colors": [
-      "#ede8db",
-      "#c8b79e",
-      "#a59f91",
-      "#6d7b6e",
-      "#38413d"
+      "#eee6d8",
+      "#b79a73",
+      "#7a8b80",
+      "#627f93",
+      "#28323a"
     ],
     "updatedAt": "2026-06-28T00:00:00.000Z",
     "translations": {
       "en": {
-        "name": "Stone Boucle",
-        "tagline": "Dimensional boucle surface with a clean modern palette.",
-        "description": "A tactile boucle upholstery fabric created for contemporary sofas, lounge pieces, and soft commercial interiors requiring comfort and visible texture.",
+        "name": "Camellia Chenille",
+        "tagline": "Soft handfeel, layered color, export-ready upholstery fabric.",
+        "description": "A refined chenille upholstery fabric with a dry natural texture and stable colorways for sofas, lounge chairs, cushions, and boutique hospitality interiors.",
         "applications": [
           "Sofa",
-          "Armchair",
-          "Ottoman",
-          "Boutique hotel seating"
+          "Lounge chair",
+          "Cushion",
+          "Hospitality seating"
         ],
         "specs": [
           {
-            "label": "Surface",
-            "value": "Boucle loop texture"
+            "label": "Composition",
+            "value": "Polyester blend"
           },
           {
             "label": "Width",
             "value": "140 cm"
           },
           {
-            "label": "Handfeel",
-            "value": "Soft and dimensional"
+            "label": "Weight",
+            "value": "520 gsm approx."
           },
           {
-            "label": "QC",
-            "value": "Shade and handfeel inspection"
+            "label": "MOQ",
+            "value": "Discuss by colorway"
           }
         ],
         "translationStatus": "manual"
       },
       "zh": {
-        "name": "岩感圈圈布",
-        "tagline": "立体圈圈肌理，现代中性色系。",
-        "description": "触感鲜明的圈圈沙发布，适合现代沙发、休闲软装和精品商业空间，兼具舒适度和可见肌理。",
+        "name": "山茶雪尼尔",
+        "tagline": "手感柔和、色层丰富、适合出口订单的沙发布。",
+        "description": "细腻雪尼尔沙发布，带自然干爽肌理，色系稳定，适合沙发、休闲椅、靠垫及精品酒店空间。",
         "applications": [
           "沙发",
-          "单椅",
-          "脚凳",
-          "精品酒店座椅"
+          "休闲椅",
+          "靠垫",
+          "酒店座椅"
         ],
         "specs": [
           {
-            "label": "表面",
-            "value": "圈圈纱肌理"
+            "label": "成分",
+            "value": "涤纶混纺"
           },
           {
             "label": "门幅",
             "value": "140 cm"
           },
           {
-            "label": "手感",
-            "value": "柔软立体"
+            "label": "克重",
+            "value": "约 520 gsm"
           },
           {
-            "label": "质检",
-            "value": "色差和手感检验"
-          }
-        ],
-        "translationStatus": "manual"
-      }
-    }
-  },
-  {
-    "id": "prod-linen-horizon",
-    "slug": "linen-horizon",
-    "sku": "HD-LN-0912",
-    "category": "Linen-look Drapery",
-    "status": "published",
-    "featured": true,
-    "collection": "Linen Horizon",
-    "image": "/images/showroom-textiles.png",
-    "gallery": [
-      "/images/showroom-textiles.png",
-      "/images/soft-rolls.png",
-      "/images/swatch-books.png"
-    ],
-    "colors": [
-      "#f1eadf",
-      "#c9b99f",
-      "#9d9485",
-      "#727d70",
-      "#414743"
-    ],
-    "updatedAt": "2026-06-28T00:00:00.000Z",
-    "translations": {
-      "en": {
-        "name": "Linen Horizon Drapery",
-        "tagline": "A calm linen-look curtain fabric with soft light filtration.",
-        "description": "A versatile drapery fabric with a natural linen expression, steady handfeel, and coordinated neutral colors for residential and contract interiors.",
-        "applications": [
-          "Curtain",
-          "Sheer layer",
-          "Room divider",
-          "Decorative panel"
-        ],
-        "specs": [
-          {
-            "label": "Look",
-            "value": "Linen texture"
-          },
-          {
-            "label": "Width",
-            "value": "280 cm option"
-          },
-          {
-            "label": "Finish",
-            "value": "Soft drape"
-          },
-          {
-            "label": "Packing",
-            "value": "Roll packing for export"
-          }
-        ],
-        "translationStatus": "manual"
-      },
-      "zh": {
-        "name": "亚麻天际窗帘布",
-        "tagline": "自然仿麻质感，柔和透光，适合安静空间。",
-        "description": "通用型窗帘面料，呈现自然亚麻肌理，手感稳定，配色柔和，适用于住宅及工程空间。",
-        "applications": [
-          "窗帘",
-          "纱帘层",
-          "隔断",
-          "装饰面板"
-        ],
-        "specs": [
-          {
-            "label": "外观",
-            "value": "仿麻肌理"
-          },
-          {
-            "label": "门幅",
-            "value": "可选 280 cm"
-          },
-          {
-            "label": "后整理",
-            "value": "柔和垂感"
-          },
-          {
-            "label": "包装",
-            "value": "出口卷装"
+            "label": "起订量",
+            "value": "按色号沟通"
           }
         ],
         "translationStatus": "manual"
@@ -255,84 +170,169 @@
     }
   },
   {
-    "id": "prod-camellia-chenille",
-    "slug": "camellia-chenille",
-    "sku": "HD-CH-2601",
-    "category": "Chenille Upholstery",
+    "id": "prod-linen-horizon",
+    "slug": "linen-horizon",
+    "sku": "HD-LN-0912",
+    "category": "Linen-look Drapery",
     "status": "published",
     "featured": true,
-    "collection": "Soft Residence",
-    "image": "/images/swatch-books.png",
+    "collection": "Linen Horizon",
+    "image": "/images/showroom-textiles.png",
     "gallery": [
-      "/images/swatch-books.png",
-      "/images/collection-rolls.png",
-      "/images/pattern-grid.png"
+      "/images/showroom-textiles.png",
+      "/images/soft-rolls.png",
+      "/images/swatch-books.png"
     ],
     "colors": [
-      "#eee6d8",
-      "#b79a73",
-      "#7a8b80",
-      "#627f93",
-      "#28323a"
+      "#f1eadf",
+      "#c9b99f",
+      "#9d9485",
+      "#727d70",
+      "#414743"
     ],
     "updatedAt": "2026-06-28T00:00:00.000Z",
     "translations": {
       "en": {
-        "name": "Camellia Chenille",
-        "tagline": "Soft handfeel, layered color, export-ready upholstery fabric.",
-        "description": "A refined chenille upholstery fabric with a dry natural texture and stable colorways for sofas, lounge chairs, cushions, and boutique hospitality interiors.",
+        "name": "Linen Horizon Drapery",
+        "tagline": "A calm linen-look curtain fabric with soft light filtration.",
+        "description": "A versatile drapery fabric with a natural linen expression, steady handfeel, and coordinated neutral colors for residential and contract interiors.",
         "applications": [
-          "Sofa",
-          "Lounge chair",
-          "Cushion",
-          "Hospitality seating"
+          "Curtain",
+          "Sheer layer",
+          "Room divider",
+          "Decorative panel"
         ],
         "specs": [
           {
-            "label": "Composition",
-            "value": "Polyester blend"
+            "label": "Look",
+            "value": "Linen texture"
+          },
+          {
+            "label": "Width",
+            "value": "280 cm option"
+          },
+          {
+            "label": "Finish",
+            "value": "Soft drape"
+          },
+          {
+            "label": "Packing",
+            "value": "Roll packing for export"
+          }
+        ],
+        "translationStatus": "manual"
+      },
+      "zh": {
+        "name": "亚麻天际窗帘布",
+        "tagline": "自然仿麻质感，柔和透光，适合安静空间。",
+        "description": "通用型窗帘面料，呈现自然亚麻肌理，手感稳定，配色柔和，适用于住宅及工程空间。",
+        "applications": [
+          "窗帘",
+          "纱帘层",
+          "隔断",
+          "装饰面板"
+        ],
+        "specs": [
+          {
+            "label": "外观",
+            "value": "仿麻肌理"
+          },
+          {
+            "label": "门幅",
+            "value": "可选 280 cm"
+          },
+          {
+            "label": "后整理",
+            "value": "柔和垂感"
+          },
+          {
+            "label": "包装",
+            "value": "出口卷装"
+          }
+        ],
+        "translationStatus": "manual"
+      }
+    }
+  },
+  {
+    "id": "prod-stone-boucle",
+    "slug": "stone-boucle",
+    "sku": "HD-BC-3120",
+    "category": "Boucle Upholstery",
+    "status": "published",
+    "featured": true,
+    "collection": "Tactile Stone",
+    "image": "/images/quality-control.png",
+    "gallery": [
+      "/images/quality-control.png",
+      "/images/swatch-books.png",
+      "/images/pattern-grid.png"
+    ],
+    "colors": [
+      "#ede8db",
+      "#c8b79e",
+      "#a59f91",
+      "#6d7b6e",
+      "#38413d"
+    ],
+    "updatedAt": "2026-06-28T00:00:00.000Z",
+    "translations": {
+      "en": {
+        "name": "Stone Boucle",
+        "tagline": "Dimensional boucle surface with a clean modern palette.",
+        "description": "A tactile boucle upholstery fabric created for contemporary sofas, lounge pieces, and soft commercial interiors requiring comfort and visible texture.",
+        "applications": [
+          "Sofa",
+          "Armchair",
+          "Ottoman",
+          "Boutique hotel seating"
+        ],
+        "specs": [
+          {
+            "label": "Surface",
+            "value": "Boucle loop texture"
           },
           {
             "label": "Width",
             "value": "140 cm"
           },
           {
-            "label": "Weight",
-            "value": "520 gsm approx."
+            "label": "Handfeel",
+            "value": "Soft and dimensional"
           },
           {
-            "label": "MOQ",
-            "value": "Discuss by colorway"
+            "label": "QC",
+            "value": "Shade and handfeel inspection"
           }
         ],
         "translationStatus": "manual"
       },
       "zh": {
-        "name": "山茶雪尼尔",
-        "tagline": "手感柔和、色层丰富、适合出口订单的沙发布。",
-        "description": "细腻雪尼尔沙发布，带自然干爽肌理，色系稳定，适合沙发、休闲椅、靠垫及精品酒店空间。",
+        "name": "岩感圈圈布",
+        "tagline": "立体圈圈肌理，现代中性色系。",
+        "description": "触感鲜明的圈圈沙发布，适合现代沙发、休闲软装和精品商业空间，兼具舒适度和可见肌理。",
         "applications": [
           "沙发",
-          "休闲椅",
-          "靠垫",
-          "酒店座椅"
+          "单椅",
+          "脚凳",
+          "精品酒店座椅"
         ],
         "specs": [
           {
-            "label": "成分",
-            "value": "涤纶混纺"
+            "label": "表面",
+            "value": "圈圈纱肌理"
           },
           {
             "label": "门幅",
             "value": "140 cm"
           },
           {
-            "label": "克重",
-            "value": "约 520 gsm"
+            "label": "手感",
+            "value": "柔软立体"
           },
           {
-            "label": "起订量",
-            "value": "按色号沟通"
+            "label": "质检",
+            "value": "色差和手感检验"
           }
         ],
         "translationStatus": "manual"
