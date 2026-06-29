@@ -104,6 +104,13 @@ img {
   letter-spacing: 0;
 }
 
+.brand-logo {
+  width: clamp(118px, 13vw, 160px);
+  height: auto;
+  max-height: 62px;
+  object-fit: contain;
+}
+
 .brand-cn {
   font-size: clamp(24px, 3vw, 34px);
   font-weight: 650;
@@ -829,6 +836,12 @@ img {
   margin: 0;
 }
 
+.admin-login-logo {
+  width: min(260px, 78vw);
+  height: auto;
+  justify-self: center;
+}
+
 .login-panel input,
 .field input,
 .field textarea,
@@ -858,6 +871,16 @@ img {
   gap: 24px;
   width: min(1400px, 100%);
   margin: 0 auto 26px;
+}
+
+.admin-title-lockup {
+  display: grid;
+  gap: 8px;
+}
+
+.admin-title-lockup img {
+  width: min(230px, 36vw);
+  height: auto;
 }
 
 .admin-grid {
@@ -1111,6 +1134,10 @@ img {
 
   .brand-cn {
     font-size: 22px;
+  }
+
+  .brand-logo {
+    width: 116px;
   }
 
   .brand-en {

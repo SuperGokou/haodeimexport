@@ -182,8 +182,7 @@ export default function ProductSite({
             <Menu size={20} />
           </button>
           <a href="#top" className="brand-mark" aria-label={companyText.name}>
-            <span className="brand-cn">湖州好德</span>
-            <span className="brand-en">Huzhou Haode</span>
+            <img className="brand-logo" src="/images/brand-logo.png" alt={companyText.name} />
           </a>
           <nav className={menuOpen ? 'nav-links nav-links-open' : 'nav-links'}>
             <button className="icon-button mobile-only close-menu" onClick={() => setMenuOpen(false)}>

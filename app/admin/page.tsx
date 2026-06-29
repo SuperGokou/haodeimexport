@@ -385,6 +385,7 @@ export default function AdminPage() {
               {locale === 'zh' ? 'EN' : '中文'}
             </button>
           </div>
+          <img className="admin-login-logo" src="/images/brand-logo.png" alt={t.companyName} />
           <h1>{t.loginTitle}</h1>
           <p>{t.loginIntro}</p>
           <input
@@ -406,7 +407,8 @@ export default function AdminPage() {
   return (
     <main className="admin-shell">
       <header className="admin-header">
-        <div>
+        <div className="admin-title-lockup">
+          <img src="/images/brand-logo.png" alt={t.companyName} />
           <p className="eyebrow">{t.companyName}</p>
           <h1>{t.adminTitle}</h1>
         </div>
