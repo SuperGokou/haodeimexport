@@ -1,0 +1,34 @@
+{
+  "email": "sales@haodeimexport.com",
+  "phone": "+86 572 000 0000",
+  "whatsapp": "+86 138 0000 0000",
+  "markets": ["North America", "Europe", "Middle East", "Southeast Asia"],
+  "capabilities": [
+    "Fabric sourcing and development",
+    "Sample room and colorway coordination",
+    "Pre-shipment inspection",
+    "Export documentation support"
+  ],
+  "facts": [
+    { "label": "Product lines", "value": "8+" },
+    { "label": "Export markets", "value": "30+" },
+    { "label": "Sample response", "value": "48h" },
+    { "label": "QC checkpoints", "value": "4-step" }
+  ],
+  "translations": {
+    "en": {
+      "name": "Huzhou Haode Import and Export Co.,Ltd.",
+      "shortName": "Huzhou Haode",
+      "intro": "A textile export partner focused on upholstery, curtain, jacquard, chenille, linen-look, and decorative home fabrics. We help overseas buyers move from fabric direction to sampled, inspected, export-ready goods.",
+      "address": "Huzhou, Zhejiang, China",
+      "serviceNote": "Send your target texture, color, width, composition, and usage. Our team will match suitable fabrics and prepare sample options."
+    },
+    "zh": {
+      "name": "湖州好德进出口有限公司",
+      "shortName": "湖州好德",
+      "intro": "专注家纺、沙发布、窗帘布、提花、雪尼尔、仿麻及装饰面料的外贸出口服务。从面料方向、样品开发、品质检验到出口交付，协助海外客户高效完成采购。",
+      "address": "中国浙江湖州",
+      "serviceNote": "可提供目标肌理、颜色、门幅、成分和用途，我们会协助匹配面料并准备样品方案。"
+    }
+  }
+}
