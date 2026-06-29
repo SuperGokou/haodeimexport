@@ -65,6 +65,14 @@ async function readGithubJson<T>(filePath: string): Promise<T | null> {
 }
 
 async function writeGithubJson(filePath: string, data: unknown, message: string) {
+  await writeGithubFile(
+    filePath,
+    Buffer.from(`${JSON.stringify(data, null, 2)}\n`, 'utf8'),
+    message
+  )
+}
+
+async function writeGithubFile(filePath: string, content: Buffer, message: string) {
   const { token, repo, branch } = githubConfig()
   if (!token) throw new Error('Missing GITHUB_TOKEN')
 
@@ -72,7 +80,7 @@ async function writeGithubJson(filePath: string, data: unknown, message: string)
   const body: Record<string, unknown> = {
     message,
     branch,
-    content: Buffer.from(`${JSON.stringify(data, null, 2)}\n`, 'utf8').toString('base64')
+    content: content.toString('base64')
   }
 
   if (existing?.sha) {
@@ -93,6 +101,21 @@ async function writeGithubJson(filePath: string, data: unknown, message: string)
     const text = await response.text()
     throw new Error(`GitHub write failed for ${filePath}: ${response.status} ${text}`)
   }
+}
+
+export async function saveProductImage(fileName: string, content: Buffer) {
+  const publicPath = `/uploads/products/${fileName}`
+  const repoPath = `public${publicPath}`
+
+  if (shouldUseGithub()) {
+    await writeGithubFile(repoPath, content, `Upload Haode product image ${fileName}`)
+    return publicPath
+  }
+
+  const uploadDir = path.join(root, 'public', 'uploads', 'products')
+  await fs.mkdir(uploadDir, { recursive: true })
+  await fs.writeFile(path.join(uploadDir, fileName), content)
+  return publicPath
 }
 
 export async function getProducts(): Promise<Product[]> {

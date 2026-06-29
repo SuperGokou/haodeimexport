@@ -48,7 +48,6 @@ type Copy = {
   specs: string
   applications: string
   colors: string
-  admin: string
 }
 
 type CatalogMode = 'products' | 'collections'
@@ -94,8 +93,7 @@ const copy: Record<Locale, Copy> = {
     all: 'All',
     specs: 'Specifications',
     applications: 'Applications',
-    colors: 'Colorways',
-    admin: 'Admin'
+    colors: 'Colorways'
   },
   zh: {
     nav: ['产品', '系列', '关于我们', '联系'],
@@ -128,8 +126,7 @@ const copy: Record<Locale, Copy> = {
     all: '全部',
     specs: '规格',
     applications: '用途',
-    colors: '色系',
-    admin: '后台'
+    colors: '色系'
   }
 }
 
@@ -255,9 +252,7 @@ export default function ProductSite({
             <Mail size={14} />
             {company.email}
           </a>
-          <a href="/admin" className="utility-link">
-            {t.admin}
-          </a>
+          <span aria-hidden="true" />
         </div>
         <div className="nav-bar">
           <button

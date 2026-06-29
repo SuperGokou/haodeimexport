@@ -1,7 +1,7 @@
 import crypto from 'crypto'
 import type { NextRequest } from 'next/server'
 
-const cookieName = 'haode_admin'
+const cookieName = 'hzhd_console'
 
 type SessionPayload = {
   role: 'admin'

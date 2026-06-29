@@ -12,7 +12,11 @@ export const metadata: Metadata = {
     'upholstery fabric',
     'curtain fabric',
     'home textiles'
-  ]
+  ],
+  icons: {
+    icon: [{ url: '/icon.png', type: 'image/png' }],
+    apple: [{ url: '/apple-icon.png', type: 'image/png' }]
+  }
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

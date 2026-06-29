@@ -2,6 +2,7 @@
 
 import {
   Globe2,
+  LogIn,
   LogOut,
   Plus,
   Save,
@@ -11,6 +12,13 @@ import {
 } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import type { CompanyInfo, Locale, Product, ProductSpec, ProductTranslation } from '@/lib/types'
+
+type UploadTarget = 'main' | 'gallery'
+
+const uploadAccept = 'image/jpeg,image/png,image/webp'
+const maxUploadBytes = 4 * 1024 * 1024
+const recommendedImageSize = { width: 1600, height: 1100 }
+const consoleApiBase = '/api/hzhd-gate-2601'
 
 type TranslationEditorCopy = {
   name: string
@@ -48,6 +56,15 @@ type AdminCopy = {
   featured: string
   mainImage: string
   gallery: string
+  uploadMainImage: string
+  uploadGalleryImage: string
+  uploadHint: string
+  uploadingImage: string
+  uploadSuccess: string
+  uploadFailed: string
+  uploadTypeInvalid: string
+  uploadTooLarge: string
+  uploadSmallNotice: string
   colors: string
   chineseSource: string
   englishTranslation: string
@@ -80,7 +97,7 @@ const adminCopy: Record<Locale, AdminCopy> = {
     login: '登录',
     loginFailed: '登录失败',
     companyName: '湖州好德进出口有限公司',
-    adminTitle: '产品与 AI 内容后台',
+    adminTitle: '产品后台',
     viewSite: '查看网站',
     logout: '退出登录',
     newProduct: '新增产品',
@@ -97,6 +114,15 @@ const adminCopy: Record<Locale, AdminCopy> = {
     featured: '首页精选',
     mainImage: '主图 URL',
     gallery: '图库图片 URL，每行一个',
+    uploadMainImage: '上传主图',
+    uploadGalleryImage: '上传到图库',
+    uploadHint: '尺寸提示：建议 1600 x 1100 px 或更大，JPG/PNG/WebP，单张不超过 4MB。',
+    uploadingImage: '正在上传...',
+    uploadSuccess: '图片已上传，记得保存产品。',
+    uploadFailed: '图片上传失败',
+    uploadTypeInvalid: '仅支持 JPG、PNG、WebP 图片。',
+    uploadTooLarge: '图片太大，请控制在',
+    uploadSmallNotice: '图片已上传，但尺寸偏小，建议 1600 x 1100 px 以上。',
     colors: '色卡 hex 值，用逗号分隔',
     chineseSource: '中文内容',
     englishTranslation: '英文翻译',
@@ -140,7 +166,7 @@ const adminCopy: Record<Locale, AdminCopy> = {
     login: 'Login',
     loginFailed: 'Login failed',
     companyName: 'Huzhou Haode Import and Export Co.,Ltd.',
-    adminTitle: 'Product & AI Content Admin',
+    adminTitle: 'Product Admin',
     viewSite: 'View Site',
     logout: 'Logout',
     newProduct: 'New Product',
@@ -157,6 +183,15 @@ const adminCopy: Record<Locale, AdminCopy> = {
     featured: 'Featured on homepage',
     mainImage: 'Main image URL',
     gallery: 'Gallery image URLs, one per line',
+    uploadMainImage: 'Upload Main',
+    uploadGalleryImage: 'Upload Gallery',
+    uploadHint: 'Size guide: 1600 x 1100 px or larger, JPG/PNG/WebP, max 4MB each.',
+    uploadingImage: 'Uploading...',
+    uploadSuccess: 'Image uploaded. Remember to save the product.',
+    uploadFailed: 'Image upload failed',
+    uploadTypeInvalid: 'Only JPG, PNG, and WebP images are supported.',
+    uploadTooLarge: 'Image is too large. Please keep it under',
+    uploadSmallNotice: 'Image uploaded, but it is small. Recommended size is 1600 x 1100 px or larger.',
     colors: 'Color hex values, comma separated',
     chineseSource: 'Chinese Source',
     englishTranslation: 'English Translation',
@@ -231,6 +266,7 @@ export default function AdminPage() {
   const [companyJson, setCompanyJson] = useState('')
   const [autoTranslate, setAutoTranslate] = useState(true)
   const [saving, setSaving] = useState(false)
+  const [uploadingTarget, setUploadingTarget] = useState<UploadTarget | null>(null)
   const [notice, setNotice] = useState('')
   const t = adminCopy[locale]
 
@@ -244,7 +280,7 @@ export default function AdminPage() {
   }, [])
 
   async function checkSession() {
-    const response = await fetch('/api/admin/session')
+    const response = await fetch(`${consoleApiBase}/session`)
     const data = await response.json()
     setAuthenticated(Boolean(data.authenticated))
     if (data.authenticated) {
@@ -255,7 +291,7 @@ export default function AdminPage() {
   async function login(event: React.FormEvent) {
     event.preventDefault()
     setNotice('')
-    const response = await fetch('/api/admin/login', {
+    const response = await fetch(`${consoleApiBase}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ password })
@@ -272,13 +308,13 @@ export default function AdminPage() {
   }
 
   async function logout() {
-    await fetch('/api/admin/logout', { method: 'POST' })
+    await fetch(`${consoleApiBase}/logout`, { method: 'POST' })
     setAuthenticated(false)
     setProducts([])
   }
 
   async function loadProducts() {
-    const response = await fetch('/api/admin/products')
+    const response = await fetch(`${consoleApiBase}/products`)
     if (!response.ok) return
     const data = await response.json()
     setProducts(data.products)
@@ -286,7 +322,7 @@ export default function AdminPage() {
   }
 
   async function loadCompany() {
-    const response = await fetch('/api/admin/company')
+    const response = await fetch(`${consoleApiBase}/company`)
     if (!response.ok) return
     const data = await response.json()
     setCompanyJson(JSON.stringify(data.company, null, 2))
@@ -309,12 +345,71 @@ export default function AdminPage() {
     }))
   }
 
+  async function uploadImage(event: React.ChangeEvent<HTMLInputElement>, target: UploadTarget) {
+    const file = event.currentTarget.files?.[0]
+    event.currentTarget.value = ''
+    if (!file || uploadingTarget) return
+
+    if (!uploadAccept.split(',').includes(file.type)) {
+      setNotice(t.uploadTypeInvalid)
+      return
+    }
+
+    if (file.size > maxUploadBytes) {
+      setNotice(`${t.uploadTooLarge} ${formatFileSize(maxUploadBytes)}.`)
+      return
+    }
+
+    const dimensions = await readImageDimensions(file).catch(() => null)
+    const isSmall =
+      dimensions &&
+      (dimensions.width < recommendedImageSize.width || dimensions.height < recommendedImageSize.height)
+
+    setUploadingTarget(target)
+    setNotice(t.uploadingImage)
+
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+      const response = await fetch(`${consoleApiBase}/uploads`, {
+        method: 'POST',
+        body: formData
+      })
+      const data = await response.json().catch(() => ({}))
+
+      if (!response.ok || !data.url) {
+        setNotice(data.error || t.uploadFailed)
+        return
+      }
+
+      setDraft((current) => {
+        if (target === 'main') {
+          return {
+            ...current,
+            image: data.url,
+            gallery: current.gallery.includes(data.url) ? current.gallery : [data.url, ...current.gallery]
+          }
+        }
+
+        return {
+          ...current,
+          gallery: current.gallery.includes(data.url) ? current.gallery : [...current.gallery, data.url]
+        }
+      })
+      setNotice(isSmall ? t.uploadSmallNotice : t.uploadSuccess)
+    } catch {
+      setNotice(t.uploadFailed)
+    } finally {
+      setUploadingTarget(null)
+    }
+  }
+
   async function saveProduct(event: React.FormEvent) {
     event.preventDefault()
     setSaving(true)
     setNotice(autoTranslate ? t.saveTranslateNotice : t.saveProductNotice)
 
-    const endpoint = selectedIsExisting ? `/api/admin/products/${draft.id}` : '/api/admin/products'
+    const endpoint = selectedIsExisting ? `${consoleApiBase}/products/${draft.id}` : `${consoleApiBase}/products`
     const response = await fetch(endpoint, {
       method: selectedIsExisting ? 'PATCH' : 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -337,7 +432,7 @@ export default function AdminPage() {
   async function deleteProduct() {
     if (!selectedIsExisting) return
     setSaving(true)
-    const response = await fetch(`/api/admin/products/${draft.id}`, { method: 'DELETE' })
+    const response = await fetch(`${consoleApiBase}/products/${draft.id}`, { method: 'DELETE' })
     setSaving(false)
     if (!response.ok) {
       setNotice(t.deleteFailed)
@@ -353,7 +448,7 @@ export default function AdminPage() {
     setNotice(t.savingCompany)
     try {
       const company = JSON.parse(companyJson) as CompanyInfo
-      const response = await fetch('/api/admin/company', {
+      const response = await fetch(`${consoleApiBase}/company`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ company })
@@ -373,9 +468,24 @@ export default function AdminPage() {
   if (!authenticated) {
     return (
       <main className="admin-login">
-        <form onSubmit={login} className="login-panel">
-          <div className="login-topbar">
-            <p className="eyebrow">{t.cms}</p>
+        <section className="login-card">
+          <aside className="login-visual" aria-hidden="true">
+            <img src="/images/hero-fabric-rolls.png" alt="" />
+            <div className="login-visual-caption">
+              <span>HAODE CMS</span>
+              <strong>{locale === 'zh' ? '面料后台' : 'Textile Admin'}</strong>
+            </div>
+          </aside>
+
+          <form onSubmit={login} className="login-panel">
+            <div className="login-topbar">
+              <div className="login-brand">
+                <img src="/images/brand-symbol.png" alt="" aria-hidden="true" />
+                <span>
+                  <strong>{locale === 'zh' ? '湖州好德' : 'Huzhou Haode'}</strong>
+                  <small>{locale === 'zh' ? 'Huzhou Haode' : 'Admin Console'}</small>
+                </span>
+              </div>
             <button
               className="secondary-button"
               type="button"
@@ -384,22 +494,28 @@ export default function AdminPage() {
               <Globe2 size={16} />
               {locale === 'zh' ? 'EN' : '中文'}
             </button>
-          </div>
-          <img className="admin-login-logo" src="/images/brand-logo.png" alt={t.companyName} />
-          <h1>{t.loginTitle}</h1>
-          <p>{t.loginIntro}</p>
-          <input
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            placeholder={t.passwordPlaceholder}
-          />
-          <button className="primary-button" type="submit">
-            {t.login}
-            <Globe2 size={16} />
-          </button>
-          {notice && <p className="admin-notice">{notice}</p>}
-        </form>
+            </div>
+            <div className="login-heading">
+              <p className="eyebrow">{t.cms}</p>
+              <h1>{t.loginTitle}</h1>
+              <p>{locale === 'zh' ? '产品、翻译、AI 客服。' : 'Products, translations, AI service.'}</p>
+            </div>
+            <label className="login-field">
+              <span>{t.passwordPlaceholder}</span>
+              <input
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                placeholder={t.passwordPlaceholder}
+              />
+            </label>
+            <button className="primary-button login-submit" type="submit">
+              {t.login}
+              <LogIn size={17} />
+            </button>
+            {notice && <p className="admin-notice">{notice}</p>}
+          </form>
+        </section>
       </main>
     )
   }
@@ -408,8 +524,13 @@ export default function AdminPage() {
     <main className="admin-shell">
       <header className="admin-header">
         <div className="admin-title-lockup">
-          <img src="/images/brand-logo.png" alt={t.companyName} />
-          <p className="eyebrow">{t.companyName}</p>
+          <span className="admin-brand-row">
+            <img src="/images/brand-symbol.png" alt="" aria-hidden="true" />
+            <span>
+              <strong>{locale === 'zh' ? '湖州好德' : 'Huzhou Haode'}</strong>
+              <small>{t.companyName}</small>
+            </span>
+          </span>
           <h1>{t.adminTitle}</h1>
         </div>
         <div className="admin-actions">
@@ -506,7 +627,17 @@ export default function AdminPage() {
           </div>
 
           <Field label={t.mainImage}>
-            <input value={draft.image} onChange={(event) => patchDraft({ image: event.target.value })} />
+            <div className="image-url-row">
+              <input value={draft.image} onChange={(event) => patchDraft({ image: event.target.value })} />
+              <UploadButton
+                label={t.uploadMainImage}
+                busyLabel={t.uploadingImage}
+                busy={uploadingTarget === 'main'}
+                disabled={Boolean(uploadingTarget)}
+                onChange={(event) => uploadImage(event, 'main')}
+              />
+            </div>
+            <span className="field-hint">{t.uploadHint}</span>
           </Field>
 
           <Field label={t.gallery}>
@@ -521,6 +652,16 @@ export default function AdminPage() {
                 })
               }
             />
+            <div className="field-action-row">
+              <UploadButton
+                label={t.uploadGalleryImage}
+                busyLabel={t.uploadingImage}
+                busy={uploadingTarget === 'gallery'}
+                disabled={Boolean(uploadingTarget)}
+                onChange={(event) => uploadImage(event, 'gallery')}
+              />
+            </div>
+            <span className="field-hint">{t.uploadHint}</span>
           </Field>
 
           <Field label={t.colors}>
@@ -585,11 +726,55 @@ export default function AdminPage() {
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <label className="field">
+    <div className="field">
       <span>{label}</span>
       {children}
+    </div>
+  )
+}
+
+function UploadButton({
+  label,
+  busyLabel,
+  busy,
+  disabled,
+  onChange
+}: {
+  label: string
+  busyLabel: string
+  busy: boolean
+  disabled: boolean
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+}) {
+  return (
+    <label className={disabled ? 'upload-button disabled' : 'upload-button'}>
+      <UploadCloud size={15} />
+      {busy ? busyLabel : label}
+      <input type="file" accept={uploadAccept} disabled={disabled} onChange={onChange} />
     </label>
   )
+}
+
+function readImageDimensions(file: File): Promise<{ width: number; height: number }> {
+  return new Promise((resolve, reject) => {
+    const image = new Image()
+    const objectUrl = URL.createObjectURL(file)
+
+    image.onload = () => {
+      URL.revokeObjectURL(objectUrl)
+      resolve({ width: image.naturalWidth, height: image.naturalHeight })
+    }
+    image.onerror = () => {
+      URL.revokeObjectURL(objectUrl)
+      reject(new Error('Unable to read image dimensions'))
+    }
+    image.src = objectUrl
+  })
+}
+
+function formatFileSize(bytes: number) {
+  if (bytes >= 1024 * 1024) return `${Math.round((bytes / 1024 / 1024) * 10) / 10}MB`
+  return `${Math.round(bytes / 1024)}KB`
 }
 
 function TranslationEditor({
