@@ -2,10 +2,11 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Huzhou Haode Import and Export Co.,Ltd. | Home Textile Fabrics',
+  title: '湖州好德进出口有限公司 | Huzhou Haode Home Textile Fabrics',
   description:
-    'Bilingual textile export website for upholstery, curtain, jacquard, chenille, and linen-look fabrics.',
+    '湖州好德进出口有限公司外贸官网，提供沙发布、窗帘布、提花、雪尼尔、仿麻及家纺装饰面料。',
   keywords: [
+    '湖州好德',
     'Huzhou Haode',
     'textile export',
     'upholstery fabric',
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="zh-CN">
       <body>{children}</body>
     </html>
   )

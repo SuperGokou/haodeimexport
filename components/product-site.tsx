@@ -131,7 +131,7 @@ export default function ProductSite({
   initialProducts: Product[]
   company: CompanyInfo
 }) {
-  const [locale, setLocale] = useState<Locale>('en')
+  const [locale, setLocale] = useState<Locale>('zh')
   const [menuOpen, setMenuOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('all')
@@ -186,8 +186,11 @@ export default function ProductSite({
             <Menu size={20} />
           </button>
           <a href="#top" className="brand-mark" aria-label={companyText.name}>
-            <span className="brand-cn">{companyText.shortName}</span>
-            <span className="brand-en">{locale === 'zh' ? 'HUZHOU HAODE' : 'Import & Export'}</span>
+            <img className="brand-symbol" src="/images/brand-symbol.png" alt="" aria-hidden="true" />
+            <span className="brand-copy">
+              <span className="brand-cn">{companyText.shortName}</span>
+              <span className="brand-en">{locale === 'zh' ? 'HUZHOU HAODE' : 'Import & Export'}</span>
+            </span>
           </a>
           <nav className={menuOpen ? 'nav-links nav-links-open' : 'nav-links'}>
             <button className="icon-button mobile-only close-menu" onClick={() => setMenuOpen(false)}>
