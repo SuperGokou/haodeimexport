@@ -31,8 +31,8 @@ export function normalizeProduct(input: Partial<Product>, previous?: Product): P
     status: input.status || previous?.status || 'draft',
     featured: Boolean(input.featured ?? previous?.featured ?? false),
     collection: input.collection || previous?.collection || 'New Collection',
-    image: input.image || previous?.image || '/images/swatch-books.png',
-    gallery: input.gallery?.length ? input.gallery : previous?.gallery || ['/images/swatch-books.png'],
+    image: input.image || previous?.image || '/images/haode-swatch-books.jpg',
+    gallery: input.gallery?.length ? input.gallery : previous?.gallery || ['/images/haode-swatch-books.jpg'],
     colors: input.colors?.length ? input.colors : previous?.colors || ['#efe8db', '#a8845e', '#2d3c38'],
     updatedAt: new Date().toISOString(),
     translations: {

@@ -246,8 +246,8 @@ function createEmptyProduct(): Product {
     status: 'draft',
     featured: false,
     collection: 'New Collection',
-    image: '/images/swatch-books.png',
-    gallery: ['/images/swatch-books.png'],
+    image: '/images/haode-swatch-books.jpg',
+    gallery: ['/images/haode-swatch-books.jpg'],
     colors: ['#efe8db', '#a8845e', '#2d3c38'],
     updatedAt: new Date().toISOString(),
     translations: {
@@ -470,7 +470,7 @@ export default function AdminPage() {
       <main className="admin-login">
         <section className="login-card">
           <aside className="login-visual" aria-hidden="true">
-            <img src="/images/hero-fabric-rolls.png" alt="" />
+            <img src="/images/haode-neutral-fabric-rolls.jpg" alt="" />
             <div className="login-visual-caption">
               <span>HAODE CMS</span>
               <strong>{locale === 'zh' ? '面料后台' : 'Textile Admin'}</strong>

@@ -784,7 +784,7 @@ img {
   border-bottom: 1px solid var(--line);
   background:
     linear-gradient(90deg, rgba(248, 245, 238, 0.98), rgba(255, 253, 248, 0.92)),
-    url("/images/pattern-grid.png");
+    url("/images/haode-texture-grid.jpg");
   background-position: center;
   background-size: cover;
 }
@@ -1349,7 +1349,7 @@ img {
   padding: clamp(18px, 5vw, 48px);
   background:
     linear-gradient(180deg, rgba(248, 245, 238, 0.92), rgba(248, 245, 238, 0.88)),
-    url("/images/pattern-grid.png");
+    url("/images/haode-texture-grid.jpg");
   background-position: center;
   background-size: cover;
 }

@@ -166,7 +166,7 @@ export default function ProductSite({
         name,
         products,
         categories: Array.from(new Set(products.map((product) => product.category))),
-        image: products[0]?.gallery[0] || products[0]?.image || '/images/swatch-books.png'
+        image: products[0]?.gallery[0] || products[0]?.image || '/images/haode-swatch-books.jpg'
       }))
       .sort((a, b) => a.name.localeCompare(b.name))
   }, [initialProducts])
@@ -334,7 +334,7 @@ export default function ProductSite({
             </div>
           </div>
           <figure className="hero-visual">
-            <img className="hero-image" src="/images/hero-fabric-rolls.png" alt="" />
+            <img className="hero-image" src="/images/haode-neutral-fabric-rolls.jpg" alt="" />
             <figcaption className="hero-caption">
               <span>{locale === 'zh' ? '面料方向' : 'Fabric direction'}</span>
               <strong>{heroMaterials.join(' / ')}</strong>
@@ -419,7 +419,7 @@ export default function ProductSite({
           </a>
         </div>
         <div className="story-image-wrap">
-          <img src="/images/showroom-textiles.png" alt={locale === 'zh' ? '家纺面料应用空间' : 'Home textile application showroom'} />
+          <img src="/images/haode-showroom-curtains.jpg" alt={locale === 'zh' ? '家纺面料应用空间' : 'Home textile application showroom'} />
         </div>
       </section>
 
@@ -428,7 +428,7 @@ export default function ProductSite({
           <h2>{t.patterns}</h2>
         </div>
         <div className="pattern-strip">
-          <img src="/images/pattern-grid.png" alt={locale === 'zh' ? '面料纹样与色彩' : 'Fabric patterns and colors'} />
+          <img src="/images/haode-texture-grid.jpg" alt={locale === 'zh' ? '面料纹样与色彩' : 'Fabric patterns and colors'} />
           <button className="icon-button pattern-next" aria-label="Next pattern">
             <ChevronRight size={24} />
           </button>
@@ -447,7 +447,7 @@ export default function ProductSite({
           <TrustItem icon={<ShieldCheck size={22} />} title={companyCapabilities[2]} />
           <TrustItem icon={<Check size={22} />} title={companyCapabilities[3]} />
         </div>
-        <img className="trust-image" src="/images/quality-control.png" alt={locale === 'zh' ? '面料质检' : 'Fabric quality control'} />
+        <img className="trust-image" src="/images/haode-factory-production.jpg" alt={locale === 'zh' ? '面料生产线' : 'Fabric production line'} />
       </section>
 
       <footer id="contact" className="site-footer">

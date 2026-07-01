@@ -7,11 +7,11 @@
     "status": "published",
     "featured": true,
     "collection": "Soft Residence",
-    "image": "/images/swatch-books.png",
+    "image": "/images/haode-swatch-books.jpg",
     "gallery": [
-      "/images/swatch-books.png",
-      "/images/collection-rolls.png",
-      "/images/pattern-grid.png"
+      "/images/haode-swatch-books.jpg",
+      "/images/haode-african-wax-fabric.jpg",
+      "/images/haode-texture-grid.jpg"
     ],
     "colors": [
       "#eee6d8",
@@ -92,11 +92,11 @@
     "status": "published",
     "featured": true,
     "collection": "Verdant Pattern",
-    "image": "/images/pattern-grid.png",
+    "image": "/images/haode-texture-grid.jpg",
     "gallery": [
-      "/images/pattern-grid.png",
-      "/images/showroom-textiles.png",
-      "/images/quality-control.png"
+      "/images/haode-texture-grid.jpg",
+      "/images/haode-showroom-curtains.jpg",
+      "/images/haode-quality-inspection.jpg"
     ],
     "colors": [
       "#f4efe4",
@@ -177,11 +177,11 @@
     "status": "published",
     "featured": true,
     "collection": "Linen Horizon",
-    "image": "/images/showroom-textiles.png",
+    "image": "/images/haode-showroom-curtains.jpg",
     "gallery": [
-      "/images/showroom-textiles.png",
-      "/images/soft-rolls.png",
-      "/images/swatch-books.png"
+      "/images/haode-showroom-curtains.jpg",
+      "/images/haode-neutral-fabric-rolls.jpg",
+      "/images/haode-swatch-books.jpg"
     ],
     "colors": [
       "#f1eadf",
@@ -262,11 +262,11 @@
     "status": "published",
     "featured": true,
     "collection": "Tactile Stone",
-    "image": "/images/quality-control.png",
+    "image": "/images/haode-quality-inspection.jpg",
     "gallery": [
-      "/images/quality-control.png",
-      "/images/swatch-books.png",
-      "/images/pattern-grid.png"
+      "/images/haode-quality-inspection.jpg",
+      "/images/haode-swatch-books.jpg",
+      "/images/haode-texture-grid.jpg"
     ],
     "colors": [
       "#ede8db",
