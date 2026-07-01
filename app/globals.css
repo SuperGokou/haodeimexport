@@ -2700,3 +2700,112 @@ body {
     width: min(1440px, calc(100% - 160px)); /* 质感提升：修改原值 calc(100% - 56px/96px) -> 新值 calc(100% - 160px) */
   }
 }
+
+/* Premium section alignment layer: one measured grid for every homepage band. */
+:root {
+  --page-max: 1440px; /* 质感提升：修改原值 分散 1180/1240/1280/1440px -> 新值 1440px 统一版心 */
+  --page-gutter: clamp(24px, 5vw, 80px); /* 质感提升：修改原值 24/48/56/96px 分散边距 -> 新值 clamp(24px,5vw,80px) */
+  --page-width: min(var(--page-max), calc(100% - var(--page-gutter) - var(--page-gutter))); /* 质感提升：新增统一内容宽度 */
+  --section-space: clamp(96px, 8vw, 132px); /* 质感提升：修改原值 72-128px 分散间距 -> 新值 clamp(96px,8vw,132px) */
+}
+
+.utility-bar,
+.nav-bar,
+.hero-layout,
+.hero-material-bar,
+.section-heading,
+.filter-row,
+.arrival-grid,
+.collection-inner,
+.split-story,
+.pattern-showcase,
+.trust-section {
+  width: var(--page-width); /* 质感提升：修改原值 多套宽度 -> 新值统一 page-width */
+}
+
+.section,
+.pattern-section {
+  padding-top: var(--section-space); /* 质感提升：修改原值 clamp(72px,10vw,128px) -> 新值统一 section-space */
+  padding-bottom: var(--section-space); /* 质感提升：修改原值 clamp(72px,10vw,128px) -> 新值统一 section-space */
+}
+
+.section-heading.centered {
+  margin-bottom: clamp(38px, 4vw, 54px); /* 质感提升：修改原值 30px -> 新值 clamp(38px,4vw,54px) */
+}
+
+.section-heading.centered p {
+  max-width: 860px; /* 质感提升：修改原值 760px -> 新值 860px 保持标题区整齐 */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.arrival-grid {
+  border-left: 1px solid rgba(10, 30, 47, 0.06); /* 质感提升：新增左右细线，让产品区和版心边界更稳 */
+  border-right: 1px solid rgba(10, 30, 47, 0.06); /* 质感提升：新增左右细线，让产品区和版心边界更稳 */
+}
+
+.collection-band {
+  padding-top: var(--section-space); /* 质感提升：修改原值 clamp(104px,8vw,132px) -> 新值统一 section-space */
+  padding-bottom: var(--section-space); /* 质感提升：修改原值 clamp(104px,8vw,132px) -> 新值统一 section-space */
+}
+
+.split-story {
+  margin-left: auto; /* 质感提升：修改原值 满屏贴边 -> 新值版心居中 */
+  margin-right: auto; /* 质感提升：修改原值 满屏贴边 -> 新值版心居中 */
+  min-height: clamp(560px, 40vw, 640px); /* 质感提升：修改原值 520px -> 新值 clamp(560px,40vw,640px) */
+  background: #f4f6f9; /* 质感提升：修改原值 #f4f2ed -> 新值 #f4f6f9 */
+}
+
+.story-copy {
+  padding: clamp(72px, 7vw, 112px); /* 质感提升：修改原值 clamp(44px,7vw,96px) -> 新值 clamp(72px,7vw,112px) */
+}
+
+.pattern-showcase {
+  gap: clamp(48px, 5vw, 84px); /* 质感提升：修改原值 clamp(28px,5vw,72px) -> 新值 clamp(48px,5vw,84px) */
+}
+
+.trust-section {
+  padding-bottom: var(--section-space); /* 质感提升：修改原值 clamp(96px,9vw,132px) -> 新值统一 section-space */
+}
+
+.site-footer {
+  padding-left: max(var(--page-gutter), calc((100vw - var(--page-max)) / 2)); /* 质感提升：修改原值 1240px 版心 -> 新值统一 1440px 版心 */
+  padding-right: max(var(--page-gutter), calc((100vw - var(--page-max)) / 2)); /* 质感提升：修改原值 1240px 版心 -> 新值统一 1440px 版心 */
+}
+
+@media (max-width: 900px) {
+  :root {
+    --page-gutter: 24px; /* 质感提升：修改原值 分散 14/18/24px -> 新值 24px */
+    --section-space: clamp(72px, 9vw, 96px); /* 质感提升：修改原值 56-96px -> 新值 clamp(72px,9vw,96px) */
+  }
+
+  .split-story {
+    width: 100%; /* 质感提升：修改原值 page-width -> 新值移动端满宽故事区 */
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --page-gutter: 14px; /* 质感提升：修改原值 24px -> 新值 14px 适配窄屏 */
+    --section-space: 64px; /* 质感提升：修改原值 clamp(72px,9vw,96px) -> 新值 64px */
+  }
+
+  .section-heading,
+  .filter-row,
+  .arrival-grid,
+  .collection-inner,
+  .pattern-showcase,
+  .trust-section {
+    width: var(--page-width); /* 质感提升：修改原值 多套移动宽度 -> 新值统一 page-width */
+  }
+
+  .collection-band,
+  .pattern-section {
+    padding-top: var(--section-space); /* 质感提升：修改原值 分散移动间距 -> 新值统一 section-space */
+    padding-bottom: var(--section-space); /* 质感提升：修改原值 分散移动间距 -> 新值统一 section-space */
+  }
+
+  .story-copy {
+    padding: 56px var(--page-gutter); /* 质感提升：修改原值 40px 18px -> 新值 56px + 统一 gutter */
+  }
+}
