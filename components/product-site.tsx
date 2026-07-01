@@ -38,6 +38,7 @@ type Copy = {
   useCases: string
   useCasesCopy: string
   patterns: string
+  patternCopy: string
   trust: string
   trustCopy: string
   contact: string
@@ -95,6 +96,8 @@ const copy: Record<Locale, Copy> = {
     useCasesCopy:
       'Soft textures, clean colorways, and practical specifications for residential, hospitality, and contract interiors.',
     patterns: 'Patterns And Colors',
+    patternCopy:
+      'Layered jacquards, linen-look surfaces, satin sheen, and tactile textures can be coordinated into color-ready directions for sampling.',
     trust: 'Export Service You Can Check',
     trustCopy:
       'Every inquiry can be matched with fabric options, sample timing, packing details, and QC checkpoints before shipment.',
@@ -129,6 +132,7 @@ const copy: Record<Locale, Copy> = {
     useCases: '安静质感，适合日常使用',
     useCasesCopy: '柔和肌理、干净色系和实用规格，适用于住宅、酒店及工程软装空间。',
     patterns: '纹样与色彩',
+    patternCopy: '提花、仿麻、缎面与肌理纹样可按色系组合，方便客户快速确认打样方向。',
     trust: '可核验的出口服务',
     trustCopy: '每个询盘都可匹配面料方案、样品周期、包装细节和出货前质检节点。',
     contact: '联系',
@@ -163,6 +167,7 @@ export default function ProductSite({
   const t = copy[locale]
   const companyText = company.translations[locale]
   const companyCapabilities = company.capabilityLabels?.[locale] || company.capabilities
+  const patternPalette = ['#efe8db', '#c3ac8f', '#7b8a70', '#5c5144', '#2e3430']
   const socialLinks = [
     { label: 'LinkedIn', icon: <Linkedin size={17} strokeWidth={1.9} /> },
     { label: 'Facebook', icon: <Facebook size={17} strokeWidth={1.9} /> },
@@ -455,14 +460,24 @@ export default function ProductSite({
       </section>
 
       <section className="pattern-section">
-        <div className="section-heading centered">
-          <h2>{t.patterns}</h2>
-        </div>
-        <div className="pattern-strip">
-          <img src="/images/haode-texture-grid.jpg" alt={locale === 'zh' ? '面料纹样与色彩' : 'Fabric patterns and colors'} />
-          <button className="icon-button pattern-next" aria-label="Next pattern">
-            <ChevronRight size={24} />
-          </button>
+        <div className="pattern-showcase">
+          <div className="pattern-copy">
+            <p className="eyebrow">{locale === 'zh' ? '纹样开发' : 'Pattern library'}</p>
+            <h2>{t.patterns}</h2>
+            <p>{t.patternCopy}</p>
+            <div className="pattern-palette" aria-label={locale === 'zh' ? '代表性色卡' : 'Representative color palette'}>
+              {patternPalette.map((color) => (
+                <span key={color} style={{ backgroundColor: color }} />
+              ))}
+            </div>
+          </div>
+          <div className="pattern-strip">
+            <img src="/images/haode-texture-grid.jpg" alt={locale === 'zh' ? '面料纹样与色彩' : 'Fabric patterns and colors'} />
+            <span className="pattern-caption">Jacquard / Linen / Satin / Boucle</span>
+            <button className="icon-button pattern-next" aria-label="Next pattern">
+              <ChevronRight size={24} />
+            </button>
+          </div>
         </div>
       </section>
 
