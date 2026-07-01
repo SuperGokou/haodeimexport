@@ -147,6 +147,7 @@ export default function ProductSite({
   const [catalogFilter, setCatalogFilter] = useState('all')
   const t = copy[locale]
   const companyText = company.translations[locale]
+  const companyCapabilities = company.capabilityLabels?.[locale] || company.capabilities
 
   const categories = useMemo(
     () => ['all', ...Array.from(new Set(initialProducts.map((product) => product.category)))],
@@ -327,7 +328,7 @@ export default function ProductSite({
               {company.facts.map((fact) => (
                 <span key={fact.label}>
                   <strong>{fact.value}</strong>
-                  {fact.label}
+                  {fact.labels?.[locale] || fact.label}
                 </span>
               ))}
             </div>
@@ -441,10 +442,10 @@ export default function ProductSite({
           <p>{t.trustCopy}</p>
         </div>
         <div className="trust-grid">
-          <TrustItem icon={<Factory size={22} />} title={company.capabilities[0]} />
-          <TrustItem icon={<PackageCheck size={22} />} title={company.capabilities[1]} />
-          <TrustItem icon={<ShieldCheck size={22} />} title={company.capabilities[2]} />
-          <TrustItem icon={<Check size={22} />} title={company.capabilities[3]} />
+          <TrustItem icon={<Factory size={22} />} title={companyCapabilities[0]} />
+          <TrustItem icon={<PackageCheck size={22} />} title={companyCapabilities[1]} />
+          <TrustItem icon={<ShieldCheck size={22} />} title={companyCapabilities[2]} />
+          <TrustItem icon={<Check size={22} />} title={companyCapabilities[3]} />
         </div>
         <img className="trust-image" src="/images/quality-control.png" alt={locale === 'zh' ? '面料质检' : 'Fabric quality control'} />
       </section>

@@ -47,8 +47,11 @@ export type CompanyInfo = {
   whatsapp: string
   markets: string[]
   capabilities: string[]
+  capabilityLabels?: Record<Locale, string[]>
+  aiKnowledge?: Record<Locale, string[]>
   facts: {
     label: string
+    labels?: Record<Locale, string>
     value: string
   }[]
   translations: Record<Locale, CompanyTranslation>

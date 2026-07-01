@@ -157,6 +157,11 @@ export async function answerCustomerQuestion({
 }) {
   const language = locale === 'zh' ? 'Chinese' : 'English'
   const companyText = company.translations[locale]
+  const capabilitiesContext = company.capabilityLabels?.[locale] || company.capabilities
+  const factsContext = company.facts
+    .map((fact) => `${fact.labels?.[locale] || fact.label}: ${fact.value}`)
+    .join(', ')
+  const knowledgeContext = company.aiKnowledge?.[locale]?.map((item) => `- ${item}`).join('\n') || ''
   const productContext = products
     .slice(0, 8)
     .map((product) => {
@@ -177,7 +182,10 @@ export async function answerCustomerQuestion({
           content: `Company: ${companyText.intro}
 Contact: ${company.email}, ${company.phone}
 Markets: ${company.markets.join(', ')}
-Capabilities: ${company.capabilities.join(', ')}
+Capabilities: ${capabilitiesContext.join(', ')}
+Facts: ${factsContext}
+AI customer service knowledge:
+${knowledgeContext}
 Products:
 ${productContext}
 

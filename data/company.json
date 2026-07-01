@@ -1,5 +1,5 @@
 {
-  "email": "sales@haodetextile.com ",
+  "email": "sales@haodetextile.com",
   "phone": "+86 180 7414 1905",
   "whatsapp": "+86 180 7414 1905",
   "markets": [
@@ -9,43 +9,107 @@
     "Southeast Asia"
   ],
   "capabilities": [
-    "Fabric sourcing and development",
-    "Sample room and colorway coordination",
-    "Pre-shipment inspection",
-    "Export documentation support"
+    "Integrated textile supply chain backed by Jiangsu Changde Textile",
+    "In-house DTY texturing, weaving, dyeing, printing, and finishing",
+    "Custom fabric development and surface finish matching",
+    "Large-order production with stage-by-stage quality checks"
   ],
+  "capabilityLabels": {
+    "en": [
+      "Integrated production chain",
+      "Custom fabric development",
+      "Dyeing and finishing options",
+      "Stage-by-stage quality checks"
+    ],
+    "zh": [
+      "一体化生产链",
+      "定制面料开发",
+      "染整后整理工艺",
+      "分阶段品质检查"
+    ]
+  },
+  "aiKnowledge": {
+    "en": [
+      "Huzhou Haode Import & Export Co., Ltd. is a specialized textile trading and export company. It is backed by Jiangsu Changde Textile Co., Ltd., a large-scale textile manufacturing group with more than 20 years of industry experience.",
+      "The company combines in-house manufacturing capability with professional export service, so buyers can discuss fabric direction, sampling, production, inspection, packing, and delivery through one export partner.",
+      "Core advantage: one-stop integrated production from raw polyester filament to finished fabric. The supply chain covers DTY texturing, weaving, dyeing, printing, and finishing.",
+      "Texturing capability: the manufacturing base produces its own DTY polyester filaments, improving cost control, yarn stability, and production flexibility.",
+      "Weaving capability: the production base uses advanced looms for efficient, precision weaving at scale.",
+      "Dyeing, printing, and finishing are handled in-house for more consistent color application, surface treatment, and lead-time control.",
+      "Production scale: the production base covers about 100,000 square meters and is equipped for both high-volume orders and flexible customization.",
+      "Equipment scale: 20+ texturing machines, 1,000+ new water-jet looms, and 4 dyeing and finishing production lines.",
+      "Main products include brushed microfiber fabric, polyester dyed fabric, polyester satin fabric, minimatt, taffeta, jacquard, chenille, linen-look, curtain fabric, upholstery fabric, and other home textile fabrics.",
+      "Brushed microfiber fabric is soft, breathable, and highly absorbent. Polyester dyed fabric supports a broad range of colors. Polyester satin offers a smooth sheen for bedding and decorative use. Minimatt is a versatile matte-finish fabric. Taffeta is lightweight and durable. Jacquard supports more premium woven pattern effects.",
+      "Surface finishes and patterns include embossing, calendering, pearlescent effects, anti-slip textures, seersucker weaves, sheared jacquard, plain nylon fabrics, and other decorative or functional finishing options.",
+      "Quality and delivery advantage: integrated production gives the team better control over quality checkpoints, shorter lead times, and more flexibility for custom orders than fully outsourced operations.",
+      "When answering buyer questions, ask for target usage, fabric composition, width, weight, color or pattern direction, surface finish, quantity, destination country or port, and sample requirements before recommending a fabric.",
+      "Do not claim certifications, prices, exact MOQ, or delivery dates unless the user provides them or the information is already present in the product data. For uncertain details, suggest confirming by email or WhatsApp."
+    ],
+    "zh": [
+      "湖州好德进出口有限公司是一家专业纺织品外贸出口公司，背靠 Jiangsu Changde Textile Co., Ltd.，该制造体系拥有二十多年纺织行业经验。",
+      "公司把工厂端生产能力和外贸出口服务结合起来，可协助海外客户完成面料方向沟通、打样、生产、验货、包装和出口交付。",
+      "核心优势是一站式垂直整合生产，从涤纶长丝原料到成品面料，覆盖 DTY 加弹、织造、染色、印花和后整理。",
+      "加弹能力：生产端可自行生产 DTY 涤纶长丝，有利于控制成本、纱线稳定性和订单灵活度。",
+      "织造能力：生产基地配备先进织机，可支持规模化、高效率、稳定精度的织造需求。",
+      "染色、印花和后整理环节在体系内完成，有利于颜色一致性、表面工艺稳定性和交期控制。",
+      "生产规模：生产基地面积约 100,000 平方米，可支持大批量订单，也可配合客户做灵活定制。",
+      "设备规模：20+ 台加弹机、1,000+ 台新型喷水织机、4 条染整生产线。",
+      "主要产品包括磨毛超细纤维面料、涤纶染色布、涤纶缎面布、迷你麻、塔夫绸、提花、雪尼尔、仿麻、窗帘布、沙发布及其他家纺装饰面料。",
+      "磨毛超细纤维面料柔软、透气、吸水性好；涤纶染色布色彩选择丰富；涤纶缎面布适合床品和装饰用途；迷你麻是通用型哑光面料；塔夫绸轻薄耐用；提花适合更高端的织造花型效果。",
+      "可提供多种花型和后整理效果，包括压花、轧光、珠光效果、防滑纹理、泡泡纱组织、剪花提花、平纹尼龙布及其他装饰或功能性工艺。",
+      "质量和交付优势：整合生产链可以更好控制质量节点、缩短交期，并比完全外协生产更适合定制订单和快速响应。",
+      "回答客户问题时，应主动询问目标用途、成分、门幅、克重、颜色或花型方向、表面工艺、数量、目的国家或港口、是否需要样品，再推荐合适面料。",
+      "不要主动承诺证书、价格、准确起订量或交期，除非客户提供或产品资料中已有明确内容；不确定的信息建议通过邮箱或 WhatsApp 进一步确认。"
+    ]
+  },
   "facts": [
     {
-      "label": "Product lines",
-      "value": "8+"
+      "label": "Production base",
+      "labels": {
+        "en": "Production base",
+        "zh": "生产基地"
+      },
+      "value": "100,000 m2"
     },
     {
-      "label": "Export markets",
-      "value": "30+"
+      "label": "Water-jet looms",
+      "labels": {
+        "en": "Water-jet looms",
+        "zh": "喷水织机"
+      },
+      "value": "1,000+"
     },
     {
-      "label": "Sample response",
-      "value": "48h"
+      "label": "Texturing machines",
+      "labels": {
+        "en": "Texturing machines",
+        "zh": "加弹设备"
+      },
+      "value": "20+"
     },
     {
-      "label": "QC checkpoints",
-      "value": "4-step"
+      "label": "Dyeing & finishing lines",
+      "labels": {
+        "en": "Dyeing & finishing lines",
+        "zh": "染整产线"
+      },
+      "value": "4"
     }
   ],
   "translations": {
     "en": {
-      "name": "Huzhou Haode Import and Export Co.,Ltd.",
+      "name": "Huzhou Haode Import and Export Co., Ltd.",
       "shortName": "Huzhou Haode",
-      "intro": "A textile export partner focused on upholstery, curtain, jacquard, chenille, linen-look, and decorative home fabrics. We help overseas buyers move from fabric direction to sampled, inspected, export-ready goods.",
+      "intro": "A specialized textile export partner backed by an integrated manufacturing group with more than 20 years of industry experience. We support overseas buyers from fabric direction and sampling to production, quality checks, and export delivery.",
       "address": "Huzhou, Zhejiang, China",
-      "serviceNote": "Send your target texture, color, width, composition, and usage. Our team will match suitable fabrics and prepare sample options."
+      "serviceNote": "Share your target usage, composition, width, weight, color or pattern direction, quantity, and destination. Our team will match suitable textile options and prepare sample suggestions."
     },
     "zh": {
       "name": "湖州好德进出口有限公司",
       "shortName": "湖州好德",
-      "intro": "专注家纺、沙发布、窗帘布、提花、雪尼尔、仿麻及装饰面料的外贸出口服务。从面料方向、样品开发、品质检验到出口交付，协助海外客户高效完成采购。",
+      "intro": "专业纺织品外贸出口伙伴，背靠拥有二十多年行业经验的整合型生产体系。我们可协助海外客户从面料方向、样品开发到生产、质检和出口交付。",
       "address": "中国浙江湖州",
-      "serviceNote": "可提供目标肌理、颜色、门幅、成分和用途，我们会协助匹配面料并准备样品方案。"
+      "serviceNote": "请提供目标用途、成分、门幅、克重、颜色或花型方向、数量和目的地，我们会协助匹配合适面料并准备样品建议。"
     }
   }
 }
