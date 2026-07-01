@@ -167,7 +167,10 @@ export default function ProductSite({
     { label: 'LinkedIn', icon: <Linkedin size={17} strokeWidth={1.9} /> },
     { label: 'Facebook', icon: <Facebook size={17} strokeWidth={1.9} /> },
     { label: 'Instagram', icon: <Instagram size={17} strokeWidth={1.9} /> },
-    { label: 'TikTok', icon: <span className="social-tk">TK</span> }
+    {
+      label: 'TikTok',
+      icon: <img className="footer-social-image" src="/images/social-tiktok.png" alt="" aria-hidden="true" />
+    }
   ]
 
   const categories = useMemo(
