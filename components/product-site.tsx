@@ -65,7 +65,7 @@ type ProductCollection = {
 
 function splitFactValue(value: string) {
   const trimmed = value.trim()
-  const match = trimmed.match(/^([\d,]+(?:\+)?)\s*(m2|sqm|sq m)?$/i)
+  const match = trimmed.match(/^([\d,.]+k?\+?)\s*(m2|sqm|sq m)?$/i)
 
   if (!match) return { value: trimmed, unit: '' }
 
@@ -81,7 +81,7 @@ const copy: Record<Locale, Copy> = {
     heroKicker: 'Home textile export partner',
     heroTitle: 'Huzhou Haode',
     heroCopy:
-      'Premium upholstery, curtain, jacquard, chenille, and linen-look fabrics prepared for sampling, inspection, and international delivery.',
+      'Main products: brushed microfiber, polyester dyed, polyester satin, Minimatt, taffeta, jacquard fabrics, and African wax-printed fabrics. We also offer diverse finishes – embossing, calendering, pearlescent, anti‑slip, seersucker, sheared jacquard, and plain nylon.',
     explore: 'Explore Collections',
     samples: 'Request Samples',
     newArrivals: 'New Arrivals',
@@ -118,7 +118,7 @@ const copy: Record<Locale, Copy> = {
     heroKicker: '家纺面料外贸伙伴',
     heroTitle: '湖州好德',
     heroCopy:
-      '提供沙发布、窗帘布、提花、雪尼尔、仿麻及装饰面料，从打样、质检到出口交付，服务海外客户。',
+      '提供梭织印花染色布、磨毛布、涤纶缎面布、塔夫绸、提花面料及非洲蜡染印花布，从打样、质检到出口交付，服务海外客户。',
     explore: '查看系列',
     samples: '申请样品',
     newArrivals: '新品推荐',
