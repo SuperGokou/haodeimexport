@@ -90,7 +90,7 @@ const copy: Record<Locale, Copy> = {
     collectionKicker: 'Home textiles',
     collectionTitle: 'Our Collection',
     collectionCopy:
-      'From upholstery fabrics to drapery and decorative surfaces, Haode supports product development with coordinated palettes, hand samples, and pre-shipment checks.',
+      'From brushed home-textile fabrics to polyester dyed fabrics, Haode supports product development, color matching, hand samples, and pre-shipment checks.',
     viewProduct: 'View Product',
     useCases: 'Quiet Luxury, Built For Daily Use',
     useCasesCopy:
