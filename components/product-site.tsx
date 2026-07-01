@@ -127,7 +127,7 @@ const copy: Record<Locale, Copy> = {
     collectionKicker: '家纺面料',
     collectionTitle: '产品系列',
     collectionCopy:
-      '从沙发布、窗帘布到装饰面料，湖州好德协助客户完成产品开发、配色、手样和出货前检查。',
+      '从家纺磨毛布到涤纶染色布，湖州好德协助客户完成产品开发、配色、手样和出货前检查。',
     viewProduct: '查看产品',
     useCases: '安静质感，适合日常使用',
     useCasesCopy: '柔和肌理、干净色系和实用规格，适用于住宅、酒店及工程软装空间。',
