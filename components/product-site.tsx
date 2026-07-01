@@ -6,7 +6,10 @@ import {
   ChevronLeft,
   ChevronRight,
   Factory,
+  Facebook,
   Globe2,
+  Instagram,
+  Linkedin,
   Mail,
   Menu,
   MessageCircle,
@@ -148,6 +151,12 @@ export default function ProductSite({
   const t = copy[locale]
   const companyText = company.translations[locale]
   const companyCapabilities = company.capabilityLabels?.[locale] || company.capabilities
+  const socialLinks = [
+    { label: 'LinkedIn', icon: <Linkedin size={17} strokeWidth={1.9} /> },
+    { label: 'Facebook', icon: <Facebook size={17} strokeWidth={1.9} /> },
+    { label: 'Instagram', icon: <Instagram size={17} strokeWidth={1.9} /> },
+    { label: 'TikTok', icon: <span className="social-tk">TK</span> }
+  ]
 
   const categories = useMemo(
     () => ['all', ...Array.from(new Set(initialProducts.map((product) => product.category)))],
@@ -458,6 +467,19 @@ export default function ProductSite({
             {t.contact}
             <ArrowRight size={15} />
           </a>
+          <div className="footer-socials" aria-label={locale === 'zh' ? '社交媒体' : 'Social media'}>
+            {socialLinks.map((social) => (
+              <span
+                className="footer-social-icon"
+                key={social.label}
+                role="img"
+                aria-label={social.label}
+                title={social.label}
+              >
+                {social.icon}
+              </span>
+            ))}
+          </div>
         </div>
         <div>
           <h3>{t.nav[0]}</h3>
