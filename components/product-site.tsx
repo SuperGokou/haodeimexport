@@ -62,6 +62,18 @@ type ProductCollection = {
   image: string
 }
 
+function splitFactValue(value: string) {
+  const trimmed = value.trim()
+  const match = trimmed.match(/^([\d,]+(?:\+)?)\s*(m2|sqm|sq m)?$/i)
+
+  if (!match) return { value: trimmed, unit: '' }
+
+  return {
+    value: match[1],
+    unit: match[2] ? 'm²' : ''
+  }
+}
+
 const copy: Record<Locale, Copy> = {
   en: {
     nav: ['Products', 'Collections', 'About', 'Contact'],
@@ -334,12 +346,19 @@ export default function ProductSite({
               </a>
             </div>
             <div className="hero-proof">
-              {company.facts.map((fact) => (
-                <span key={fact.label}>
-                  <strong>{fact.value}</strong>
-                  {fact.labels?.[locale] || fact.label}
-                </span>
-              ))}
+              {company.facts.map((fact) => {
+                const displayValue = splitFactValue(fact.value)
+
+                return (
+                  <article className="hero-proof-item" key={fact.label}>
+                    <span className="hero-proof-value">
+                      <strong>{displayValue.value}</strong>
+                      {displayValue.unit && <em>{displayValue.unit}</em>}
+                    </span>
+                    <span className="hero-proof-label">{fact.labels?.[locale] || fact.label}</span>
+                  </article>
+                )
+              })}
             </div>
           </div>
           <figure className="hero-visual">
